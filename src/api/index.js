@@ -7,6 +7,9 @@ const api = {
   SendSms: '/account/sms',
   SendSmsErr: '/account/sms_err',
   // get my info
-  UserInfo: '/user/info'
+  UserInfo: '/user/info',
+  GetMyRelatedListPagination: 'http://10.194.30.82:8888/api/Navigation/GetMyRelatedListPagination',
+  LoadApprovalBasicInfo: 'http://10.194.30.82:8888/api/TradeNew/LoadApprovalBasicInfo',
+  LoadFlowApproveOpinions: 'http://10.194.30.82:8888/api/TradeNew/LoadFlow_ApproveOpinions'
 }
 export default api
