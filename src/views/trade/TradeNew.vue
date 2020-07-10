@@ -2,85 +2,222 @@
   <a-card :bordered="true">
     <a-tabs type="card" @change="callback">
       <a-tab-pane key="1" tab="概要">
-        888
+        <a-card type="inner" title="">
+          <detail-list title="" size="small" :col="2" v-for="item of vendorInfo" :key="item.id">
+            <detail-list-item term=""><span v-html="item.vender_Name"></span></detail-list-item>
+            <detail-list-item term=""><span v-html="item.vender_SellingAgreement"></span></detail-list-item>
+            <detail-list-item term=""><span v-html="item.payer_Condition"></span></detail-list-item>
+            <detail-list-item term=""><span v-html="item.productsInfo"></span></detail-list-item>
+          </detail-list>
+        </a-card>
       </a-tab-pane>
       <a-tab-pane key="2" tab="基本信息">
-        <a-form @submit="handleSubmit" :form="form" class="form">
-          <a-row class="form-row" :gutter="16">
-            <a-col :lg="6" :md="12" :sm="24">
-              <a-form-item label="仓库名">
-                <a-input
-                  placeholder="请输入仓库名称"
-                  v-decorator="['name',{rules: [{ required: true, message: '请输入仓库名称', whitespace: true}]}]" />
-              </a-form-item>
-            </a-col>
-            <a-col :xl="{span: 7, offset: 1}" :lg="{span: 8}" :md="{span: 12}" :sm="24">
-              <a-form-item
-                label="仓库域名">
-                <a-input
-                  addonBefore="http://"
-                  addonAfter=".com"
-                  placeholder="请输入"
-                  v-decorator="[
-                    'url',
-                    {rules: [{ required: true, message: '请输入仓库域名', whitespace: true}, {validator: validate}]}
-                  ]" />
-              </a-form-item>
-            </a-col>
-            <a-col :xl="{span: 9, offset: 1}" :lg="{span: 10}" :md="{span: 24}" :sm="24">
-              <a-form-item
-                label="仓库管理员">
-                <a-select placeholder="请选择管理员" v-decorator="[ 'owner', {rules: [{ required: true, message: '请选择管理员'}]} ]">
-                  <a-select-option value="王同学">王同学</a-select-option>
-                  <a-select-option value="李同学">李同学</a-select-option>
-                  <a-select-option value="黄同学">黄同学</a-select-option>
-                </a-select>
-              </a-form-item>
-            </a-col>
-          </a-row>
-          <a-row class="form-row" :gutter="16">
-            <a-col :lg="6" :md="12" :sm="24">
-              <a-form-item
-                label="审批人">
-                <a-select placeholder="请选择审批员" v-decorator="[ 'approver', {rules: [{ required: true, message: '请选择审批员'}]} ]">
-                  <a-select-option value="王晓丽">王晓丽</a-select-option>
-                  <a-select-option value="李军">李军</a-select-option>
-                </a-select>
-              </a-form-item>
-            </a-col>
-            <a-col :xl="{span: 7, offset: 1}" :lg="{span: 8}" :md="{span: 12}" :sm="24">
-              <a-form-item
-                label="生效日期">
-                <a-range-picker
-                  style="width: 100%"
-                  v-decorator="[
-                    'dateRange',
-                    {rules: [{ required: true, message: '请选择生效日期'}]}
-                  ]" />
-              </a-form-item>
-            </a-col>
-            <a-col :xl="{span: 9, offset: 1}" :lg="{span: 10}" :md="{span: 24}" :sm="24">
-              <a-form-item
-                label="仓库类型">
-                <a-select
-                  placeholder="请选择仓库类型"
-                  v-decorator="[
-                    'type',
-                    {rules: [{ required: true, message: '请选择仓库类型'}]}
-                  ]" >
-                  <a-select-option value="公开">公开</a-select-option>
-                  <a-select-option value="私密">私密</a-select-option>
-                </a-select>
-              </a-form-item>
-            </a-col>
-          </a-row>
-          <a-form-item v-if="showSubmit">
-            <a-button htmlType="submit" >Submit</a-button>
-          </a-form-item>
-        </a-form>
+        <a-card type="inner" title="基本信息" hoverable="true">
+          <a-form @submit="handleSubmit" :form="form" class="form">
+            <a-row class="form-row" :gutter="16">
+              <a-col :lg="8" :md="12" :sm="24">
+                <a-form-item label="有效性标志">
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t11_ENDUSER_NM"/>
+                </a-form-item>
+              </a-col>
+              <a-col :lg="8" :md="12" :sm="24">
+                <a-form-item label="有效期始">
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t11_EFF_DATE"/>
+                </a-form-item>
+              </a-col>
+              <a-col :lg="8" :md="12" :sm="24">
+                <a-form-item label="有效期止">
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t11_EXP_DATE"/>
+                </a-form-item>
+              </a-col>
+            </a-row>
+            <a-row class="form-row" :gutter="16">
+              <a-col :lg="8" :md="12" :sm="24">
+                <a-form-item label="业务案例号">
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t0_CASE_NO"/>
+                </a-form-item>
+              </a-col>
+              <a-col :lg="16" :md="12" :sm="24">
+                <a-form-item label="业务案例名称">
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t0_CASE_NM"/>
+                </a-form-item>
+              </a-col>
+            </a-row>
+            <a-row class="form-row" :gutter="16">
+              <a-col :lg="8" :md="12" :sm="24">
+                <a-form-item label="交易部门">
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t11_TRANSACTION_ORG_NM"/>
+                </a-form-item>
+              </a-col>
+              <a-col :lg="8" :md="12" :sm="24">
+                <a-form-item label="交易销售担当">
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t11_TRANSACTION_PIC_NM"/>
+                </a-form-item>
+              </a-col>
+              <a-col :lg="8" :md="12" :sm="24">
+                <a-form-item label="交易处理担当">
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t11_TRANSACTION_SA_NM"/>
+                </a-form-item>
+              </a-col>
+            </a-row>
+            <a-row class="form-row" :gutter="16">
+              <a-col :lg="8" :md="12" :sm="24">
+                <a-form-item label="买方代码">
+                  <a-input-search
+                    enter-button
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t11_CUSTOMER_CODE"/>
+                </a-form-item>
+              </a-col>
+              <a-col :lg="16" :md="12" :sm="24">
+                <a-form-item label="买方">
+                  <a-input-search
+                    enter-button="调查报告"
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t11_CUSTOMER_NM"/>
+                </a-form-item>
+              </a-col>
+            </a-row>
+            <a-row class="form-row" :gutter="16">
+              <a-col :lg="8" :md="12" :sm="24">
+                <a-form-item label="最终用户代码">
+                  <a-input-search
+                    enter-button
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t11_ENDUSER_CODE"/>
+                </a-form-item>
+              </a-col>
+              <a-col :lg="16" :md="12" :sm="24">
+                <a-form-item label="最终用户">
+                  <a-input-search
+                    enter-button="调查报告"
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t11_ENDUSER_NM"/>
+                </a-form-item>
+              </a-col>
+            </a-row>
+            <a-row class="form-row" :gutter="16">
+              <a-col :lg="8" :md="12" :sm="24">
+                <a-form-item label="付款方代码">
+                  <a-input-search
+                    enter-button
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.tA_PAYER_CODE"/>
+                </a-form-item>
+              </a-col>
+              <a-col :lg="16" :md="12" :sm="24">
+                <a-form-item label="付款方">
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.tA_FULL_NAME_C"/>
+                </a-form-item>
+              </a-col>
+            </a-row>
+            <a-row class="form-row" :gutter="16">
+              <a-col :lg="8" :md="12" :sm="24">
+                <a-form-item label="销售主协议">
+                  <a-input-search
+                    enter-button="预览"
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t11_AGREEMENT_NM"/>
+                </a-form-item>
+              </a-col>
+              <a-col :lg="8" :md="12" :sm="24">
+                <a-form-item label="验收附录协议">
+                  <a-input-search
+                    enter-button="预览"
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t11_ANNEX_NM"/>
+                </a-form-item>
+              </a-col>
+              <a-col :lg="8" :md="12" :sm="24">
+                <a-form-item label="默认货物验收天数">
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t11_DAYS_BEF_ACCEPTANCE"/>
+                </a-form-item>
+              </a-col>
+            </a-row>
+            <a-row class="form-row" :gutter="16">
+              <a-col :lg="8" :md="12" :sm="24">
+                <a-form-item label="销售条款">
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t111_SELLING_PRICE_TERM"/>
+                </a-form-item>
+              </a-col>
+              <a-col :lg="8" :md="12" :sm="24">
+                <a-form-item label="销售币种">
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t111_SELLING_CURR"/>
+                </a-form-item>
+              </a-col>
+              <a-col :lg="8" :md="12" :sm="24">
+                <a-form-item label="一次性交易">
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t11_ONETIME_TRADE_NM"/>
+                </a-form-item>
+              </a-col>
+            </a-row>
+            <a-row class="form-row" :gutter="16">
+              <a-col :lg="8" :md="12" :sm="24">
+                <a-form-item label="业务途径">
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t0_BUSINESS_RT_TYPE_NM"/>
+                </a-form-item>
+              </a-col>
+            </a-row>
+            <a-form-item v-if="showSubmit">
+              <a-button htmlType="submit" >Submit</a-button>
+            </a-form-item>
+          </a-form>
+        </a-card>
         <a-tabs type="card" @change="callback">
           <a-tab-pane key="11" tab="理由说明">
-            等得到
+            <a-textarea
+              placeholder=""
+              :auto-size="{ minRows: 2, maxRows: 6 }"
+              v-model="approvalBasicInfo.bI_Reason"
+            />
           </a-tab-pane>
           <a-tab-pane key="12" tab="回收条款">
             Content of Tab Pane 2
@@ -110,14 +247,29 @@
   </a-card>
 </template>
 <script>
-import { LoadFlowApproveOpinions } from '@/api/trade/tradeNew'
+import { LoadFlowApproveOpinions, LoadBAppT11, LoadApprovalBasicInfo, GetFormViewCRPT } from '@/api/trade/tradeNew'
+import DetailList from '@/components/tools/DetailList'
+const DetailListItem = DetailList.Item
 export default {
     name: 'TradeNew',
+    components: {
+      DetailList,
+      DetailListItem
+    },
     data () {
         return {
             queryParamByOne: {
-                biId: 620128
+                biId: this.$route.params.biId
             },
+            queryParamByOne1: {
+                biId: this.$route.params.biId,
+                comCode: ''
+            },
+            t11Info: {
+            },
+            approvalBasicInfo: {
+            },
+            vendorInfo: [],
             approvalOptionList: [],
             approvalOptioncolumns: [{
               title: '步骤',
@@ -140,13 +292,43 @@ export default {
     },
     methods: {
         queryFlowApproveOpinions () {
+            var _parentThis = this
             LoadFlowApproveOpinions(this.queryParamByOne).then(res => {
-                this.approvalOptionList = res.reponse
+                _parentThis.approvalOptionList = res.reponse
+            })
+        },
+        queryBApp_T11 () {
+            var _parentThis = this
+            LoadBAppT11(this.queryParamByOne).then(res => {
+                _parentThis.t11Info = res.reponse[0]
+            })
+        },
+        queryApprovalBasicInfo () {
+            var _parentThis = this
+            LoadApprovalBasicInfo(this.queryParamByOne).then(res => {
+                _parentThis.approvalBasicInfo = res.reponse[0]
+                _parentThis.queryParamByOne1 = {
+                  biId: _parentThis.$route.params.biId,
+                  comCode: _parentThis.approvalBasicInfo.bI_CompanyCode
+                }
+                _parentThis.queryFormViewCRPT()
+            })
+        },
+        queryFormViewCRPT () {
+            var _parentThis = this
+            GetFormViewCRPT(this.queryParamByOne1).then(res => {
+                _parentThis.vendorInfo = res.reponse
             })
         }
     },
     activated () {
+      debugger
+      this.queryParamByOne = {
+        biId: this.$route.params.biId
+      }
       this.queryFlowApproveOpinions()
+      this.queryBApp_T11()
+      this.queryApprovalBasicInfo()
     }
 }
 </script>

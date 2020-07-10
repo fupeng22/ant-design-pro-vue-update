@@ -60,7 +60,9 @@ export default {
             })
         },
         viewDetail (record) {
+          debugger
           console.info(record)
+          this.$router.push({ name: 'TradeNew', params: { biId: record.bI_ID } })
         }
     },
     activated () {
