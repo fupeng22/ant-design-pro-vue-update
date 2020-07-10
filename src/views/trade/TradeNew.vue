@@ -2,7 +2,19 @@
   <a-card :bordered="true">
     <a-tabs type="card" @change="callback">
       <a-tab-pane key="1" tab="概要">
-        <a-card type="inner" title="">
+        <a-row :gutter="3">
+          <a-col :span="10">
+            <a-card title="交易背景" :bordered="true" type="inner" >
+              <span v-html="approvalBasicInfo.bI_Reason"></span>
+            </a-card>
+          </a-col>
+          <a-col :span="14">
+            <a-card title="客户(付款方):" :bordered="true" type="inner" >
+              <p>card content</p>
+            </a-card>
+          </a-col>
+        </a-row>
+        <a-card type="inner" title="供应商">
           <detail-list title="" size="small" :col="2" v-for="item of vendorInfo" :key="item.id">
             <detail-list-item term=""><span v-html="item.vender_Name"></span></detail-list-item>
             <detail-list-item term=""><span v-html="item.vender_SellingAgreement"></span></detail-list-item>
