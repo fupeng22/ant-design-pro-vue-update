@@ -32,3 +32,19 @@ export function GetFormViewCRPT (parameter) {
     data: parameter
   })
 }
+
+export function LoadPublicTA1ForTA1 (parameter) {
+  return axios({
+    url: api.LoadPublic_TA1_For_TA1,
+    method: 'post',
+    data: parameter
+  })
+}
+
+export function LoadPublicTA11 (parameter) {
+  return axios({
+    url: api.LoadPublic_TA11,
+    method: 'post',
+    data: parameter
+  })
+}

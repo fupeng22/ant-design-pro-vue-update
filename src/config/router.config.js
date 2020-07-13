@@ -36,7 +36,7 @@ export const asyncRouterMap = [
             path: '/trade/TradeNew',
             name: 'TradeNew',
             component: () => import('@/views/trade/TradeNew'),
-            meta: { title: '交易决裁', keepAlive: false, permission: ['dashboard'], icon: bxAnaalyse }
+            meta: { title: '交易决裁', keepAlive: false, hidden: true, permission: ['dashboard'], icon: bxAnaalyse }
           }
         ]
       }
