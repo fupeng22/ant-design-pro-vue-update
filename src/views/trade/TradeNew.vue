@@ -27,24 +27,36 @@
         <a-card type="inner" title="基本信息" hoverable="true">
           <a-form @submit="handleSubmit" :form="form" class="form">
             <a-row class="form-row" :gutter="16">
-              <a-col :lg="8" :md="12" :sm="24">
+              <a-col :lg="3" :md="12" :sm="24">
                 <a-form-item label="有效性标志">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="5" :md="12" :sm="24">
+                <a-form-item>
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
                     v-model="t11Info.t11_VALIDITY_NM"/>
                 </a-form-item>
               </a-col>
-              <a-col :lg="8" :md="12" :sm="24">
+              <a-col :lg="3" :md="12" :sm="24">
                 <a-form-item label="有效期始">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="5" :md="12" :sm="24">
+                <a-form-item>
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
                     v-model="t11Info.t11_EFF_DATE"/>
                 </a-form-item>
               </a-col>
-              <a-col :lg="8" :md="12" :sm="24">
+              <a-col :lg="3" :md="12" :sm="24">
                 <a-form-item label="有效期止">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="5" :md="12" :sm="24">
+                <a-form-item>
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
@@ -53,16 +65,24 @@
               </a-col>
             </a-row>
             <a-row class="form-row" :gutter="16">
-              <a-col :lg="8" :md="12" :sm="24">
+              <a-col :lg="3" :md="12" :sm="24">
                 <a-form-item label="业务案例号">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="5" :md="12" :sm="24">
+                <a-form-item>
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
                     v-model="t11Info.t0_CASE_NO"/>
                 </a-form-item>
               </a-col>
-              <a-col :lg="16" :md="12" :sm="24">
+              <a-col :lg="3" :md="12" :sm="24">
                 <a-form-item label="业务案例名称">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="13" :md="12" :sm="24">
+                <a-form-item>
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
@@ -71,24 +91,36 @@
               </a-col>
             </a-row>
             <a-row class="form-row" :gutter="16">
-              <a-col :lg="8" :md="12" :sm="24">
+              <a-col :lg="3" :md="12" :sm="24">
                 <a-form-item label="交易部门">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="5" :md="12" :sm="24">
+                <a-form-item>
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
                     v-model="t11Info.t11_TRANSACTION_ORG_NM"/>
                 </a-form-item>
               </a-col>
-              <a-col :lg="8" :md="12" :sm="24">
+              <a-col :lg="3" :md="12" :sm="24">
                 <a-form-item label="交易销售担当">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="5" :md="12" :sm="24">
+                <a-form-item>
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
                     v-model="t11Info.t11_TRANSACTION_PIC_NM"/>
                 </a-form-item>
               </a-col>
-              <a-col :lg="8" :md="12" :sm="24">
+              <a-col :lg="3" :md="12" :sm="24">
                 <a-form-item label="交易处理担当">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="5" :md="12" :sm="24">
+                <a-form-item>
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
@@ -97,8 +129,12 @@
               </a-col>
             </a-row>
             <a-row class="form-row" :gutter="16">
-              <a-col :lg="8" :md="12" :sm="24">
+              <a-col :lg="3" :md="12" :sm="24">
                 <a-form-item label="买方代码">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="5" :md="12" :sm="24">
+                <a-form-item>
                   <a-input-search
                     enter-button
                     placeholder=""
@@ -106,8 +142,12 @@
                     v-model="t11Info.t11_CUSTOMER_CODE"/>
                 </a-form-item>
               </a-col>
-              <a-col :lg="16" :md="12" :sm="24">
+              <a-col :lg="3" :md="12" :sm="24">
                 <a-form-item label="买方">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="13" :md="12" :sm="24">
+                <a-form-item>
                   <a-input-search
                     enter-button="调查报告"
                     placeholder=""
@@ -117,8 +157,12 @@
               </a-col>
             </a-row>
             <a-row class="form-row" :gutter="16">
-              <a-col :lg="8" :md="12" :sm="24">
+              <a-col :lg="3" :md="12" :sm="24">
                 <a-form-item label="最终用户代码">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="5" :md="12" :sm="24">
+                <a-form-item>
                   <a-input-search
                     enter-button
                     placeholder=""
@@ -126,8 +170,12 @@
                     v-model="t11Info.t11_ENDUSER_CODE"/>
                 </a-form-item>
               </a-col>
-              <a-col :lg="16" :md="12" :sm="24">
+              <a-col :lg="3" :md="12" :sm="24">
                 <a-form-item label="最终用户">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="13" :md="12" :sm="24">
+                <a-form-item>
                   <a-input-search
                     enter-button="调查报告"
                     placeholder=""
@@ -137,8 +185,12 @@
               </a-col>
             </a-row>
             <a-row class="form-row" :gutter="16">
-              <a-col :lg="8" :md="12" :sm="24">
+              <a-col :lg="3" :md="12" :sm="24">
                 <a-form-item label="付款方代码">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="5" :md="12" :sm="24">
+                <a-form-item>
                   <a-input-search
                     enter-button
                     placeholder=""
@@ -146,8 +198,12 @@
                     v-model="t11Info.tA_PAYER_CODE"/>
                 </a-form-item>
               </a-col>
-              <a-col :lg="16" :md="12" :sm="24">
+              <a-col :lg="3" :md="12" :sm="24">
                 <a-form-item label="付款方">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="13" :md="12" :sm="24">
+                <a-form-item>
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
@@ -156,8 +212,12 @@
               </a-col>
             </a-row>
             <a-row class="form-row" :gutter="16">
-              <a-col :lg="8" :md="12" :sm="24">
+              <a-col :lg="3" :md="12" :sm="24">
                 <a-form-item label="销售主协议">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="5" :md="12" :sm="24">
+                <a-form-item>
                   <a-input-search
                     enter-button="预览"
                     placeholder=""
@@ -165,16 +225,24 @@
                     v-model="t11Info.t11_AGREEMENT_NM"/>
                 </a-form-item>
               </a-col>
-              <a-col :lg="8" :md="12" :sm="24">
+              <a-col :lg="3" :md="12" :sm="24">
                 <a-form-item label="验收附录协议">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="5" :md="12" :sm="24">
+                <a-form-item>
                   <a-input-search
                     enter-button="预览"
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
                     v-model="t11Info.t11_ANNEX_NM"/>
                 </a-form-item>
               </a-col>
-              <a-col :lg="8" :md="12" :sm="24">
+              <a-col :lg="3" :md="12" :sm="24">
                 <a-form-item label="默认货物验收天数">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="5" :md="12" :sm="24">
+                <a-form-item>
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
@@ -183,24 +251,36 @@
               </a-col>
             </a-row>
             <a-row class="form-row" :gutter="16">
-              <a-col :lg="8" :md="12" :sm="24">
+              <a-col :lg="3" :md="12" :sm="24">
                 <a-form-item label="销售条款">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="5" :md="12" :sm="24">
+                <a-form-item>
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
                     v-model="t11Info.t111_SELLING_PRICE_TERM"/>
                 </a-form-item>
               </a-col>
-              <a-col :lg="8" :md="12" :sm="24">
+              <a-col :lg="3" :md="12" :sm="24">
                 <a-form-item label="销售币种">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="5" :md="12" :sm="24">
+                <a-form-item>
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
                     v-model="t11Info.t111_SELLING_CURR"/>
                 </a-form-item>
               </a-col>
-              <a-col :lg="8" :md="12" :sm="24">
+              <a-col :lg="3" :md="12" :sm="24">
                 <a-form-item label="一次性交易">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="5" :md="12" :sm="24">
+                <a-form-item>
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
@@ -209,8 +289,12 @@
               </a-col>
             </a-row>
             <a-row class="form-row" :gutter="16">
-              <a-col :lg="8" :md="12" :sm="24">
+              <a-col :lg="3" :md="12" :sm="24">
                 <a-form-item label="业务途径">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="5" :md="12" :sm="24">
+                <a-form-item>
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
@@ -234,24 +318,36 @@
           <a-tab-pane key="12" tab="回收条款">
             <a-form @submit="handleSubmit" :form="form" class="form">
               <a-row class="form-row" :gutter="16">
-                <a-col :lg="8" :md="12" :sm="24">
+                <a-col :lg="3" :md="12" :sm="24">
                   <a-form-item label="协议号码">
+                  </a-form-item>
+                </a-col>
+                <a-col :lg="5" :md="12" :sm="24">
+                  <a-form-item>
                     <a-input
                       placeholder=""
                       v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
                       v-model="ta1Info.p008_AGREEMENT_NO"/>
                   </a-form-item>
                 </a-col>
-                <a-col :lg="8" :md="12" :sm="24">
+                <a-col :lg="3" :md="12" :sm="24">
                   <a-form-item label="协议类型">
+                  </a-form-item>
+                </a-col>
+                <a-col :lg="5" :md="12" :sm="24">
+                  <a-form-item>
                     <a-input
                       placeholder=""
                       v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
                       v-model="ta1Info.p008_AGREEMENT_TYPE_NM"/>
                   </a-form-item>
                 </a-col>
-                <a-col :lg="8" :md="12" :sm="24">
+                <a-col :lg="3" :md="12" :sm="24">
                   <a-form-item label="协议形式">
+                  </a-form-item>
+                </a-col>
+                <a-col :lg="5" :md="12" :sm="24">
+                  <a-form-item>
                     <a-input
                       placeholder=""
                       v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
@@ -260,8 +356,12 @@
                 </a-col>
               </a-row>
               <a-row class="form-row" :gutter="16">
-                <a-col :lg="8" :md="12" :sm="24">
+                <a-col :lg="3" :md="12" :sm="24">
                   <a-form-item label="协议名称">
+                  </a-form-item>
+                </a-col>
+                <a-col :lg="5" :md="12" :sm="24">
+                  <a-form-item>
                     <a-input
                       placeholder=""
                       v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
@@ -270,8 +370,12 @@
                 </a-col>
                 <a-col :lg="8" :md="12" :sm="24">
                 </a-col>
-                <a-col :lg="8" :md="12" :sm="24">
+                <a-col :lg="3" :md="12" :sm="24">
                   <a-form-item label="基准外标记">
+                  </a-form-item>
+                </a-col>
+                <a-col :lg="5" :md="12" :sm="24">
+                  <a-form-item>
                     <a-input
                       placeholder=""
                       v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
@@ -280,8 +384,12 @@
                 </a-col>
               </a-row>
               <a-row class="form-row" :gutter="16">
-                <a-col :lg="24" :md="12" :sm="24">
+                <a-col :lg="3" :md="12" :sm="24">
                   <a-form-item label="协议签订必要性描述">
+                  </a-form-item>
+                </a-col>
+                <a-col :lg="21" :md="12" :sm="24">
+                  <a-form-item>
                     <a-textarea
                       placeholder=""
                       :auto-size="{ minRows: 2, maxRows: 6 }"
@@ -291,8 +399,12 @@
                 </a-col>
               </a-row>
               <a-row class="form-row" :gutter="16">
-                <a-col :lg="8" :md="12" :sm="24">
+                <a-col :lg="3" :md="12" :sm="24">
                   <a-form-item label="联络人">
+                  </a-form-item>
+                </a-col>
+                <a-col :lg="5" :md="12" :sm="24">
+                  <a-form-item>
                     <a-input
                       placeholder=""
                       v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
@@ -301,24 +413,36 @@
                 </a-col>
               </a-row>
               <a-row class="form-row" :gutter="16">
-                <a-col :lg="8" :md="12" :sm="24">
+                <a-col :lg="3" :md="12" :sm="24">
                   <a-form-item label="协议起草日期">
+                  </a-form-item>
+                </a-col>
+                <a-col :lg="5" :md="12" :sm="24">
+                  <a-form-item>
                     <a-input
                       placeholder=""
                       v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
                       v-model="ta1Info.p008_DRAFT_PDATE"/>
                   </a-form-item>
                 </a-col>
-                <a-col :lg="8" :md="12" :sm="24">
+                <a-col :lg="3" :md="12" :sm="24">
                   <a-form-item label="协议预定签署日期">
+                  </a-form-item>
+                </a-col>
+                <a-col :lg="5" :md="12" :sm="24">
+                  <a-form-item>
                     <a-input
                       placeholder=""
                       v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
                       v-model="ta1Info.p008_SIGNOFF_PDATE"/>
                   </a-form-item>
                 </a-col>
-                <a-col :lg="8" :md="12" :sm="24">
+                <a-col :lg="3" :md="12" :sm="24">
                   <a-form-item label="协议实际签署日期">
+                  </a-form-item>
+                </a-col>
+                <a-col :lg="5" :md="12" :sm="24">
+                  <a-form-item>
                     <a-input
                       placeholder=""
                       v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
@@ -327,8 +451,12 @@
                 </a-col>
               </a-row>
               <a-row class="form-row" :gutter="16">
-                <a-col :lg="24" :md="12" :sm="24">
+                <a-col :lg="3" :md="12" :sm="24">
                   <a-form-item label="附加条件信息">
+                  </a-form-item>
+                </a-col>
+                <a-col :lg="21" :md="12" :sm="24">
+                  <a-form-item>
                     <a-textarea
                       placeholder=""
                       :auto-size="{ minRows: 2, maxRows: 6 }"
@@ -338,24 +466,36 @@
                 </a-col>
               </a-row>
               <a-row class="form-row" :gutter="16">
-                <a-col :lg="8" :md="12" :sm="24">
+                <a-col :lg="3" :md="12" :sm="24">
                   <a-form-item label="有效性标志">
+                  </a-form-item>
+                </a-col>
+                <a-col :lg="5" :md="12" :sm="24">
+                  <a-form-item>
                     <a-input
                       placeholder=""
                       v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
                       v-model="ta1Info.tA1_VALIDITY_NM"/>
                   </a-form-item>
                 </a-col>
-                <a-col :lg="8" :md="12" :sm="24">
+                <a-col :lg="3" :md="12" :sm="24">
                   <a-form-item label="有效期始">
+                  </a-form-item>
+                </a-col>
+                <a-col :lg="5" :md="12" :sm="24">
+                  <a-form-item>
                     <a-input
                       placeholder=""
                       v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
                       v-model="ta1Info.p008_EFF_DATE"/>
                   </a-form-item>
                 </a-col>
-                <a-col :lg="8" :md="12" :sm="24">
+                <a-col :lg="3" :md="12" :sm="24">
                   <a-form-item label="有效期止">
+                  </a-form-item>
+                </a-col>
+                <a-col :lg="5" :md="12" :sm="24">
+                  <a-form-item>
                     <a-input
                       placeholder=""
                       v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
