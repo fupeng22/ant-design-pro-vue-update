@@ -736,9 +736,6 @@
                 </a-form-item>
               </a-col>
             </a-row>
-            <a-form-item v-if="showSubmit">
-              <a-button htmlType="submit" >Submit</a-button>
-            </a-form-item>
             <a-row class="form-row" :gutter="16">
               <a-col :lg="24" :md="12" :sm="24">
                 <a-table :dataSource="ta11List" :title="setXiaoShouHeader" :rowKey="ta11List => ta11List.tA11_ID" :columns="ta11columns" bordered >
