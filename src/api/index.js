@@ -8,7 +8,7 @@ const api = {
   SendSmsErr: '/account/sms_err',
   // get my info
   UserInfo: '/user/info',
-  GetMyRelatedListPagination: 'http://10.194.30.82:8888/api/Navigation/GetMyRelatedListPagination',
+  GetMyRelatedListPagination: 'http://10.194.30.82:8888/api/Navigation/GetMyRelatedList',
   LoadApprovalBasicInfo: 'http://10.194.30.82:8888/api/TradeNew/LoadApprovalBasicInfo',
   LoadFlowApproveOpinions: 'http://10.194.30.82:8888/api/TradeNew/LoadFlow_ApproveOpinions',
   LoadBApp_T11: 'http://10.194.30.82:8888/api/TradeNew/LoadBApp_T11',

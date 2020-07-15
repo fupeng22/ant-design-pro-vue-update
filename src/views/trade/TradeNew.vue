@@ -5,7 +5,7 @@
         <a-row :gutter="3">
           <a-col :span="10">
             <a-card title="交易背景" :bordered="true" type="inner" >
-              <span v-html="approvalBasicInfo.bI_Reason"></span>
+              <span v-text="approvalBasicInfo.bI_Reason"></span>
             </a-card>
           </a-col>
           <a-col :span="14">
@@ -311,7 +311,7 @@
           <a-tab-pane key="11" tab="理由说明">
             <a-textarea
               placeholder=""
-              :auto-size="{ minRows: 2, maxRows: 6 }"
+              :auto-size="{ minRows: 2 }"
               v-model="approvalBasicInfo.bI_Reason"
             />
           </a-tab-pane>
@@ -523,7 +523,237 @@
         </a-tabs>
       </a-tab-pane>
       <a-tab-pane key="3" tab="销售报价明细">
-        Content of Tab Pane 3
+        <a-card type="inner" title="销售报价信息" hoverable="true">
+          <a-form @submit="handleSubmit" :form="form" class="form">
+            <a-row class="form-row" :gutter="16">
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item label="买方">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item>
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t11_VALIDITY_NM"/>
+                </a-form-item>
+              </a-col>
+              <a-col :lg="18" :md="12" :sm="24">
+                <a-form-item>
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t11_EFF_DATE"/>
+                </a-form-item>
+              </a-col>
+            </a-row>
+            <a-row class="form-row" :gutter="16">
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item label="下单方">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item>
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t11_VALIDITY_NM"/>
+                </a-form-item>
+              </a-col>
+              <a-col :lg="18" :md="12" :sm="24">
+                <a-form-item>
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t11_EFF_DATE"/>
+                </a-form-item>
+              </a-col>
+            </a-row>
+            <a-row class="form-row" :gutter="16">
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item label="最终用户">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item>
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t11_VALIDITY_NM"/>
+                </a-form-item>
+              </a-col>
+              <a-col :lg="18" :md="12" :sm="24">
+                <a-form-item>
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t11_EFF_DATE"/>
+                </a-form-item>
+              </a-col>
+            </a-row>
+            <a-row class="form-row" :gutter="16">
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item label="销售币种">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item>
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t0_CASE_NO"/>
+                </a-form-item>
+              </a-col>
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item label="销售价格条款">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item>
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t0_CASE_NM"/>
+                </a-form-item>
+              </a-col>
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item label="付款联系">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item>
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t0_CASE_NM"/>
+                </a-form-item>
+              </a-col>
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item label="回收条款">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item>
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t0_CASE_NM"/>
+                </a-form-item>
+              </a-col>
+            </a-row>
+            <a-row class="form-row" :gutter="16">
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item label="一次性交易">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item>
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t0_CASE_NO"/>
+                </a-form-item>
+              </a-col>
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item label="税率代码">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item>
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t0_CASE_NM"/>
+                </a-form-item>
+              </a-col>
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item label="报价日期">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item>
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t0_CASE_NM"/>
+                </a-form-item>
+              </a-col>
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item label="销售报价单">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item>
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t0_CASE_NM"/>
+                </a-form-item>
+              </a-col>
+            </a-row>
+            <a-row class="form-row" :gutter="16">
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item label="有效期始">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item>
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t0_CASE_NO"/>
+                </a-form-item>
+              </a-col>
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item label="有效期止">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item>
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t0_CASE_NM"/>
+                </a-form-item>
+              </a-col>
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item label="业务案例">
+                </a-form-item>
+              </a-col>
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-form-item>
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t0_CASE_NM"/>
+                </a-form-item>
+              </a-col>
+              <a-col :lg="6" :md="12" :sm="24">
+                <a-form-item>
+                  <a-input
+                    placeholder=""
+                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
+                    v-model="t11Info.t0_CASE_NM"/>
+                </a-form-item>
+              </a-col>
+            </a-row>
+            <a-form-item v-if="showSubmit">
+              <a-button htmlType="submit" >Submit</a-button>
+            </a-form-item>
+            <a-row class="form-row" :gutter="16">
+              <a-col :lg="24" :md="12" :sm="24">
+                <a-table :dataSource="ta11List" :title="setXiaoShouHeader" :rowKey="ta11List => ta11List.tA11_ID" :columns="ta11columns" bordered>
+                </a-table>
+              </a-col>
+            </a-row>
+            <a-row class="form-row" :gutter="16">
+              <a-col :lg="24" :md="12" :sm="24">
+                <a-table :dataSource="ta11List" :title="setCaiGouHeader" :rowKey="ta11List => ta11List.tA11_ID" :columns="ta11columns" bordered>
+                </a-table>
+              </a-col>
+            </a-row>
+          </a-form>
+        </a-card>
       </a-tab-pane>
       <a-tab-pane key="4" tab="附件">
         Content of Tab Pane 3
@@ -610,7 +840,13 @@ export default {
             }, {
               title: '兑现天数',
               dataIndex: 'tA11_DAYS_OF_ENCASH'
-            }]
+            }],
+            setXiaoShouHeader: function () {
+              return '销售明细'
+            },
+            setCaiGouHeader: function () {
+              return '采购明细'
+            }
         }
     },
     methods: {
