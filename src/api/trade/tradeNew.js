@@ -48,3 +48,35 @@ export function LoadPublicTA11 (parameter) {
     data: parameter
   })
 }
+
+export function LoadBAppT113 (parameter) {
+  return axios({
+    url: api.LoadBApp_T113,
+    method: 'post',
+    data: parameter
+  })
+}
+
+export function LoadPublicT112 (parameter) {
+  return axios({
+    url: api.LoadPublic_T112,
+    method: 'post',
+    data: parameter
+  })
+}
+
+export function LoadPublicT1121 (parameter) {
+  return axios({
+    url: api.LoadPublic_T1121,
+    method: 'post',
+    data: parameter
+  })
+}
+
+export function LoadPublicT2121 (parameter) {
+  return axios({
+    url: api.LoadPublic_T2121,
+    method: 'post',
+    data: parameter
+  })
+}

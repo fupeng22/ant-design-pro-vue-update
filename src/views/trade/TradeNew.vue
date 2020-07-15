@@ -534,7 +534,7 @@
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
-                    v-model="t11Info.t11_VALIDITY_NM"/>
+                    v-model="t112Info.t1_CUSTOMER_CODE"/>
                 </a-form-item>
               </a-col>
               <a-col :lg="18" :md="12" :sm="24">
@@ -542,7 +542,7 @@
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
-                    v-model="t11Info.t11_EFF_DATE"/>
+                    v-model="t112Info.t1_FULL_NAME_C"/>
                 </a-form-item>
               </a-col>
             </a-row>
@@ -556,7 +556,7 @@
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
-                    v-model="t11Info.t11_VALIDITY_NM"/>
+                    v-model="t112Info.t111_ORDERER_CODE"/>
                 </a-form-item>
               </a-col>
               <a-col :lg="18" :md="12" :sm="24">
@@ -564,7 +564,7 @@
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
-                    v-model="t11Info.t11_EFF_DATE"/>
+                    v-model="t112Info.t111_ORDERER_NM"/>
                 </a-form-item>
               </a-col>
             </a-row>
@@ -578,7 +578,7 @@
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
-                    v-model="t11Info.t11_VALIDITY_NM"/>
+                    v-model="t112Info.t112_ENDUSER_CODE"/>
                 </a-form-item>
               </a-col>
               <a-col :lg="18" :md="12" :sm="24">
@@ -586,7 +586,7 @@
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
-                    v-model="t11Info.t11_EFF_DATE"/>
+                    v-model="t112Info.t112_ENDUSER_NM"/>
                 </a-form-item>
               </a-col>
             </a-row>
@@ -600,7 +600,7 @@
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
-                    v-model="t11Info.t0_CASE_NO"/>
+                    v-model="t112Info.t111_SELLING_CURR"/>
                 </a-form-item>
               </a-col>
               <a-col :lg="3" :md="12" :sm="24">
@@ -612,7 +612,7 @@
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
-                    v-model="t11Info.t0_CASE_NM"/>
+                    v-model="t112Info.t111_SELLING_PRICE_TERM"/>
                 </a-form-item>
               </a-col>
               <a-col :lg="3" :md="12" :sm="24">
@@ -621,10 +621,6 @@
               </a-col>
               <a-col :lg="3" :md="12" :sm="24">
                 <a-form-item>
-                  <a-input
-                    placeholder=""
-                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
-                    v-model="t11Info.t0_CASE_NM"/>
                 </a-form-item>
               </a-col>
               <a-col :lg="3" :md="12" :sm="24">
@@ -633,10 +629,6 @@
               </a-col>
               <a-col :lg="3" :md="12" :sm="24">
                 <a-form-item>
-                  <a-input
-                    placeholder=""
-                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
-                    v-model="t11Info.t0_CASE_NM"/>
                 </a-form-item>
               </a-col>
             </a-row>
@@ -650,7 +642,7 @@
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
-                    v-model="t11Info.t0_CASE_NO"/>
+                    v-model="t112Info.t112_ONETIME_TRADE_NM"/>
                 </a-form-item>
               </a-col>
               <a-col :lg="3" :md="12" :sm="24">
@@ -662,7 +654,7 @@
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
-                    v-model="t11Info.t0_CASE_NM"/>
+                    v-model="t112Info.t112_TAX_RATE_NM"/>
                 </a-form-item>
               </a-col>
               <a-col :lg="3" :md="12" :sm="24">
@@ -674,7 +666,7 @@
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
-                    v-model="t11Info.t0_CASE_NM"/>
+                    v-model="t112Info.t112_QUOTATION_DATE"/>
                 </a-form-item>
               </a-col>
               <a-col :lg="3" :md="12" :sm="24">
@@ -683,10 +675,6 @@
               </a-col>
               <a-col :lg="3" :md="12" :sm="24">
                 <a-form-item>
-                  <a-input
-                    placeholder=""
-                    v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
-                    v-model="t11Info.t0_CASE_NM"/>
                 </a-form-item>
               </a-col>
             </a-row>
@@ -700,7 +688,7 @@
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
-                    v-model="t11Info.t0_CASE_NO"/>
+                    v-model="t112Info.t112_EFF_DATE"/>
                 </a-form-item>
               </a-col>
               <a-col :lg="3" :md="12" :sm="24">
@@ -712,7 +700,7 @@
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
-                    v-model="t11Info.t0_CASE_NM"/>
+                    v-model="t112Info.t112_EXP_DATE"/>
                 </a-form-item>
               </a-col>
               <a-col :lg="3" :md="12" :sm="24">
@@ -724,7 +712,7 @@
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
-                    v-model="t11Info.t0_CASE_NM"/>
+                    v-model="t112Info.t0_CASE_NO"/>
                 </a-form-item>
               </a-col>
               <a-col :lg="6" :md="12" :sm="24">
@@ -732,19 +720,22 @@
                   <a-input
                     placeholder=""
                     v-decorator="['name',{rules: [{ required: true, message: '', whitespace: true}]}]"
-                    v-model="t11Info.t0_CASE_NM"/>
+                    v-model="t112Info.t0_CASE_NM"/>
                 </a-form-item>
               </a-col>
             </a-row>
             <a-row class="form-row" :gutter="16">
               <a-col :lg="24" :md="12" :sm="24">
-                <a-table :dataSource="ta11List" :title="setXiaoShouHeader" :rowKey="ta11List => ta11List.tA11_ID" :columns="ta11columns" bordered >
+                <a-table :dataSource="t1121List" :title="setXiaoShouHeader" :rowKey="t1121List => t1121List.t1121_ID" :columns="t1121columns" bordered >
+                  <template slot="pgP_RATE">
+                    {{ approvalBasicInfo.bI_STDCurr }}
+                  </template>
                 </a-table>
               </a-col>
             </a-row>
             <a-row class="form-row" :gutter="16">
               <a-col :lg="24" :md="12" :sm="24">
-                <a-table :dataSource="ta11List" :title="setCaiGouHeader" :rowKey="ta11List => ta11List.tA11_ID" :columns="ta11columns" bordered>
+                <a-table :dataSource="t2121List" :title="setCaiGouHeader" :rowKey="t2121List => t2121List.t2121_ID" :columns="t2121columns" bordered>
                 </a-table>
               </a-col>
             </a-row>
@@ -762,7 +753,7 @@
   </a-card>
 </template>
 <script>
-import { LoadFlowApproveOpinions, LoadBAppT11, LoadApprovalBasicInfo, GetFormViewCRPT, LoadPublicTA1ForTA1, LoadPublicTA11 } from '@/api/trade/tradeNew'
+import { LoadFlowApproveOpinions, LoadBAppT11, LoadApprovalBasicInfo, GetFormViewCRPT, LoadPublicTA1ForTA1, LoadPublicTA11, LoadBAppT113, LoadPublicT112, LoadPublicT1121, LoadPublicT2121 } from '@/api/trade/tradeNew'
 import DetailList from '@/components/tools/DetailList'
 const DetailListItem = DetailList.Item
 export default {
@@ -784,12 +775,21 @@ export default {
                 biId: this.$route.params.biId,
                 t111Id: 0
             },
+            queryParamByOne3: {
+                biId: this.$route.params.biId,
+                t112Id: 0
+            },
             t11Info: {
             },
             ta1Info: {
             },
             ta11List: {
             },
+            t113Info: [],
+            t112Info: {
+            },
+            t1121List: [],
+            t2121List: [],
             approvalBasicInfo: {
             },
             vendorInfo: [],
@@ -836,6 +836,50 @@ export default {
             }, {
               title: '兑现天数',
               dataIndex: 'tA11_DAYS_OF_ENCASH'
+            }],
+            t2121columns: [{
+              title: '松下品号',
+              dataIndex: 't2121_CODE'
+            }, {
+              title: '采购数量',
+              dataIndex: 't2121_QUOTE_QTY'
+            }, {
+              title: '采购币种',
+              dataIndex: 't211_BUYING_CURR',
+              sorter: true
+            }, {
+              title: '税前金额(原币)',
+              dataIndex: 't2121_PPRICE_OF_UNI'
+            }, {
+              title: '税后金额(原币)',
+              dataIndex: 't2121_TPRICE_OF_UNI'
+            }, {
+              title: '供应商',
+              dataIndex: 't2_FULL_NAME_C'
+            }],
+            t1121columns: [{
+              title: '销售币种',
+              dataIndex: 't1121_S_CURR'
+            }, {
+              title: '税前总额(原币)',
+              dataIndex: 't1121_PPRICE_OF_UNI_Total'
+            }, {
+              title: '税后总额(原币)',
+              dataIndex: 't1121_TPRICE_OF_UNI_Total',
+              sorter: true
+            }, {
+              title: '总值差',
+              dataIndex: 'pgP_RATE'
+            }, {
+              title: '本位币',
+              dataIndex: 'pgP_RATE',
+              scopedSlots: { customRender: 'pgP_RATE' }
+            }, {
+              title: '税前总额(本位币)',
+              dataIndex: 't1121_S_PPRICE_OF_UNI_total'
+            }, {
+              title: '税后总额(本位币)',
+              dataIndex: 't1121_S_TPRICE_OF_UNI_total'
             }],
             setXiaoShouHeader: function () {
               return '销售明细'
@@ -892,6 +936,45 @@ export default {
             LoadPublicTA1ForTA1(this.queryParamByOne2).then(res => {
                 _parentThis.ta1Info = res.reponse[0]
             })
+        },
+        queryBAppT113 () {
+          var _parentThis = this
+            LoadBAppT113(this.queryParamByOne).then(res => {
+                _parentThis.t113Info = res.reponse
+
+                if (_parentThis.t113Info.length > 0) {
+                  _parentThis.queryParamByOne3 = {
+                    biId: _parentThis.$route.params.biId,
+                    t112Id: _parentThis.t113Info[0].t113_T112_ID
+                  }
+
+                  _parentThis.queryPublicT112()
+                  _parentThis.queryPublicT1121()
+                  _parentThis.queryPublicT2121()
+                } else {
+                  _parentThis.t112Info = []
+                  _parentThis.t1121List = []
+                  _parentThis.t2121List = []
+                }
+            })
+        },
+        queryPublicT112 () {
+          var _parentThis = this
+            LoadPublicT112(this.queryParamByOne3).then(res => {
+                _parentThis.t112Info = res.reponse[0]
+            })
+        },
+        queryPublicT1121 () {
+          var _parentThis = this
+            LoadPublicT1121(this.queryParamByOne3).then(res => {
+                _parentThis.t1121List = res.reponse
+            })
+        },
+        queryPublicT2121 () {
+          var _parentThis = this
+            LoadPublicT2121(this.queryParamByOne3).then(res => {
+                _parentThis.t2121List = res.reponse
+            })
         }
     },
     activated () {
@@ -903,6 +986,7 @@ export default {
       this.queryBApp_T11()
       this.queryApprovalBasicInfo()
       this.queryPublicTA11()
+      this.queryBAppT113()
     }
 }
 </script>
