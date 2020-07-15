@@ -3,12 +3,16 @@
     <a-tabs type="card" @change="callback">
       <a-tab-pane key="1" tab="概要">
         <a-row :gutter="3">
-          <a-col :span="10">
+          <a-col :lg="10" :md="12" :sm="24">
             <a-card title="交易背景" :bordered="true" type="inner" >
-              <span v-text="approvalBasicInfo.bI_Reason"></span>
+              <a-textarea
+                placeholder=""
+                :auto-size="{ minRows: 2 }"
+                v-model="approvalBasicInfo.bI_Reason"
+              />
             </a-card>
           </a-col>
-          <a-col :span="14">
+          <a-col :lg="14" :md="12" :sm="24">
             <a-card title="客户(付款方):" :bordered="true" type="inner" >
             </a-card>
           </a-col>
