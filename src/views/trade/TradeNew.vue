@@ -1,5 +1,31 @@
 <template>
   <a-card :bordered="true">
+    <template slot="title">
+      <div>
+        <a-row :gutter="1">
+          <a-col :lg="4" :md="12" :sm="24">
+            交易决裁新规
+          </a-col>
+          <a-col :lg="4" :md="12" :sm="24">
+          </a-col>
+          <a-col :lg="2" :md="12" :sm="24">
+            <a-icon type="user" />{{ approvalBasicInfo.bI_ApplicantName }}
+          </a-col>
+          <a-col :lg="5" :md="12" :sm="24">
+            <a-icon type="home" />{{ approvalBasicInfo.bI_DeptName }}
+          </a-col>
+          <a-col :lg="4" :md="12" :sm="24">
+            <a-icon type="clock-circle" />{{ approvalBasicInfo.bI_CreateDate }}
+          </a-col>
+          <a-col :lg="3" :md="12" :sm="24">
+            <a-icon type="tag" />{{ approvalBasicInfo.bI_Code }}
+          </a-col>
+          <a-col :lg="2" :md="12" :sm="24">
+            <a-icon type="tags" />{{ approvalBasicInfo.bI_AuditState_NM }}
+          </a-col>
+        </a-row>
+      </div>
+    </template>
     <a-tabs type="card" @change="callback">
       <a-tab-pane key="1" tab="概要">
         <a-row :gutter="3">
