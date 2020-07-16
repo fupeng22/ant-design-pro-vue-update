@@ -96,3 +96,19 @@ export function LoadBAppA091BAppT21 (parameter) {
     data: parameter
   })
 }
+
+export function LoadAttach (parameter) {
+  return axios({
+    url: api.LoadAttach,
+    method: 'post',
+    data: parameter
+  })
+}
+
+export function LoadAttachDetail (parameter) {
+  return axios({
+    url: api.LoadAttachDetail,
+    method: 'post',
+    data: parameter
+  })
+}

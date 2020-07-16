@@ -800,7 +800,16 @@
         </a-card>
       </a-tab-pane>
       <a-tab-pane key="4" tab="附件">
-        Content of Tab Pane 3
+        <a-table :dataSource="AttachList" :title="setAttachHeader" :rowKey="AttachList => AttachList.awF_ID" :columns="Attachcolumns" bordered>
+          <template slot="attachslot" slot-scope="text, record">
+            <a @click="handleAttachItemClick(record.awF_ID)">附件</a>
+          </template>
+        </a-table>
+        <a-table :dataSource="AttachDetailList" :title="setAttachDetailHeader" :rowKey="AttachDetailList => AttachDetailList.aD_ID" :columns="AttachDetailcolumns" bordered>
+          <template slot="attachDetailslot">
+            <a>预览</a><a-divider type="vertical" /><a>下载</a>
+          </template>
+        </a-table>
       </a-tab-pane>
       <a-tab-pane key="5" tab="审批意见">
         <a-table :dataSource="approvalOptionList" :rowKey="approvalOptionList => approvalOptionList.app_ID" :columns="approvalOptioncolumns" bordered>
@@ -810,7 +819,7 @@
   </a-card>
 </template>
 <script>
-import { LoadFlowApproveOpinions, LoadBAppT11, LoadApprovalBasicInfo, GetFormViewCRPT, LoadPublicTA1ForTA1, LoadPublicTA11, LoadBAppT113, LoadPublicT112, LoadPublicT1121, LoadPublicT2121, LoadBAppT21GC, LoadBAppA091BAppT21 } from '@/api/trade/tradeNew'
+import { LoadFlowApproveOpinions, LoadBAppT11, LoadApprovalBasicInfo, GetFormViewCRPT, LoadPublicTA1ForTA1, LoadPublicTA11, LoadBAppT113, LoadPublicT112, LoadPublicT1121, LoadPublicT2121, LoadBAppT21GC, LoadBAppA091BAppT21, LoadAttach, LoadAttachDetail } from '@/api/trade/tradeNew'
 import DetailList from '@/components/tools/DetailList'
 const DetailListItem = DetailList.Item
 export default {
@@ -841,6 +850,10 @@ export default {
                 t21Id: 0,
                 partnerCode: ''
             },
+            queryParamByOne5: {
+                biId: this.$route.params.biId,
+                awfId: 0
+            },
             t11Info: {
             },
             ta1Info: {
@@ -855,6 +868,8 @@ export default {
             bAppT21GCList: [],
             BAppA091BAppT21List1: [],
             BAppA091BAppT21List2: [],
+            AttachList: [],
+            AttachDetailList: [],
             approvalBasicInfo: {
             },
             vendorInfo: [],
@@ -1005,6 +1020,22 @@ export default {
               title: 'Control Divion',
               dataIndex: 'a091_GLOBAL_FAX_NO'
             }],
+            Attachcolumns: [{
+              title: '类型描述',
+              dataIndex: 'awF_Description'
+            }, {
+              title: '',
+              dataIndex: 'awF_ID',
+              scopedSlots: { customRender: 'attachslot' }
+            }],
+            AttachDetailcolumns: [{
+              title: '文件名称',
+              dataIndex: 'aD_FileName'
+            }, {
+              title: '',
+              dataIndex: 'aD_FileName',
+              scopedSlots: { customRender: 'attachDetailslot' }
+            }],
             setXiaoShouHeader: function () {
               return '销售明细'
             },
@@ -1016,6 +1047,12 @@ export default {
             },
             setBAppA091BAppT21Header: function () {
               return 'Global Code'
+            },
+            setAttachHeader: function () {
+              return '附件类型'
+            },
+            setAttachDetailHeader: function () {
+              return '附件'
             }
         }
     },
@@ -1189,6 +1226,26 @@ export default {
           }
           debugger
           _parentThis.queryBAppA091BAppT21detail()
+        },
+        queryAttach () {
+          var _parentThis = this
+            LoadAttach(this.queryParamByOne).then(res => {
+              _parentThis.AttachList = res.reponse
+            })
+        },
+        queryAttachDetail () {
+          var _parentThis = this
+            LoadAttachDetail(this.queryParamByOne5).then(res => {
+              _parentThis.AttachDetailList = res.reponse
+            })
+        },
+        handleAttachItemClick (awfId) {
+          var _parentThis = this
+          _parentThis.queryParamByOne5 = {
+              biId: this.$route.params.biId,
+              awfId: awfId
+          }
+          _parentThis.queryAttachDetail()
         }
     },
     activated () {
@@ -1202,6 +1259,7 @@ export default {
       this.queryPublicTA11()
       this.queryBAppT113()
       this.queryBAppT21GC()
+      this.queryAttach()
     }
 }
 </script>

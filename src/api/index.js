@@ -20,6 +20,8 @@ const api = {
   LoadPublic_T1121: 'http://10.194.30.82:8888/api/TradeNew/LoadPublic_T1121',
   LoadPublic_T2121: 'http://10.194.30.82:8888/api/TradeNew/LoadPublic_T2121',
   LoadBApp_T21_GC: 'http://10.194.30.82:8888/api/TradeNew/LoadBApp_T21_GC',
-  LoadBApp_A091_BApp_T21: 'http://10.194.30.82:8888/api/TradeNew/LoadBApp_A091_BApp_T21'
+  LoadBApp_A091_BApp_T21: 'http://10.194.30.82:8888/api/TradeNew/LoadBApp_A091_BApp_T21',
+  LoadAttach: 'http://10.194.30.82:8888/api/TradeNew/LoadAttach',
+  LoadAttachDetail: 'http://10.194.30.82:8888/api/TradeNew/LoadAttachDetail'
 }
 export default api
