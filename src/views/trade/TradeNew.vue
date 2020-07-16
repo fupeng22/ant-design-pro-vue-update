@@ -4,24 +4,37 @@
       <div>
         <a-row :gutter="1">
           <a-col :lg="4" :md="12" :sm="24">
-            交易决裁新规
+            <h2>交易决裁新规</h2>
           </a-col>
           <a-col :lg="4" :md="12" :sm="24">
           </a-col>
-          <a-col :lg="2" :md="12" :sm="24">
-            <a-icon type="user" />{{ approvalBasicInfo.bI_ApplicantName }}
-          </a-col>
-          <a-col :lg="5" :md="12" :sm="24">
-            <a-icon type="home" />{{ approvalBasicInfo.bI_DeptName }}
-          </a-col>
-          <a-col :lg="4" :md="12" :sm="24">
-            <a-icon type="clock-circle" />{{ approvalBasicInfo.bI_CreateDate }}
-          </a-col>
-          <a-col :lg="3" :md="12" :sm="24">
-            <a-icon type="tag" />{{ approvalBasicInfo.bI_Code }}
-          </a-col>
-          <a-col :lg="2" :md="12" :sm="24">
-            <a-icon type="tags" />{{ approvalBasicInfo.bI_AuditState_NM }}
+          <a-col :lg="16" :md="12" :sm="24">
+            <a-row :gutter="1">
+              <a-col :lg="16" :md="12" :sm="24">
+              </a-col>
+              <a-col :lg="8" :md="12" :sm="24">
+                <a-button type="primary" icon="printer" style="float:right">
+                  打印
+                </a-button>
+              </a-col>
+            </a-row>
+            <a-row :gutter="1">
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-icon type="user" />{{ approvalBasicInfo.bI_ApplicantName }}
+              </a-col>
+              <a-col :lg="7" :md="12" :sm="24">
+                <a-icon type="home" />{{ approvalBasicInfo.bI_DeptName }}
+              </a-col>
+              <a-col :lg="6" :md="12" :sm="24">
+                <a-icon type="clock-circle" />{{ approvalBasicInfo.bI_CreateDate }}
+              </a-col>
+              <a-col :lg="5" :md="12" :sm="24">
+                <a-icon type="tag" />{{ approvalBasicInfo.bI_Code }}
+              </a-col>
+              <a-col :lg="3" :md="12" :sm="24">
+                <a-icon type="tags" />{{ approvalBasicInfo.bI_AuditState_NM }}
+              </a-col>
+            </a-row>
           </a-col>
         </a-row>
       </div>
@@ -982,10 +995,12 @@ export default {
               ellipsis: true
             }, {
               title: '电话号码',
-              dataIndex: 'a091_GLOBAL_TEL_NO'
+              dataIndex: 'a091_GLOBAL_TEL_NO',
+              ellipsis: true
             }, {
               title: '传真号码',
-              dataIndex: 'a091_GLOBAL_FAX_NO'
+              dataIndex: 'a091_GLOBAL_FAX_NO',
+              ellipsis: true
             }, {
               title: 'Control Divion',
               dataIndex: 'a091_GLOBAL_FAX_NO'
