@@ -921,10 +921,12 @@ export default {
               scopedSlots: { customRender: 'globalCode2' }
             }, {
               title: '全称(中/英文)',
-              dataIndex: 'P000_FULL_NAME_C'
+              dataIndex: 'P000_FULL_NAME_C',
+              ellipsis: true
             }, {
               title: '全称(英文)',
-              dataIndex: 'P000_FULL_NAME_F'
+              dataIndex: 'P000_FULL_NAME_F',
+              ellipsis: true
             }, {
               title: '简称',
               dataIndex: 'A091_GLOBAL_ENG_AB'
@@ -940,13 +942,15 @@ export default {
               dataIndex: 'a091_GLOBAL_CODE'
             }, {
               title: '全称',
-              dataIndex: 'a091_GLOBAL_ENG_NM'
+              dataIndex: 'a091_GLOBAL_ENG_NM',
+              ellipsis: true
             }, {
               title: '简称',
               dataIndex: 'a091_GLOBAL_ENG_AB'
             }, {
               title: '所在地址',
-              dataIndex: 'a091_GLOBAL_ENG_ADR'
+              dataIndex: 'a091_GLOBAL_ENG_ADR',
+              ellipsis: true
             }, {
               title: '电话号码',
               dataIndex: 'a091_GLOBAL_TEL_NO'
