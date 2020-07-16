@@ -935,7 +935,8 @@ export default {
               dataIndex: 't2121_TPRICE_OF_UNI'
             }, {
               title: '供应商',
-              dataIndex: 't2_FULL_NAME_C'
+              dataIndex: 't2_FULL_NAME_C',
+              ellipsis: true
             }],
             t1121columns: [{
               title: '销售币种',
@@ -967,7 +968,8 @@ export default {
               scopedSlots: { customRender: 'globalCode1' }
             }, {
               title: '工厂',
-              dataIndex: 't21_ENDMAKER_FULL_NAME_C'
+              dataIndex: 't21_ENDMAKER_FULL_NAME_C',
+              ellipsis: true
             }, {
               title: '采购协议名称',
               dataIndex: 't21_AGREEMENT_NM'
