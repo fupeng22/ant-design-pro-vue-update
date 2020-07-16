@@ -13,7 +13,10 @@
             </a-card>
           </a-col>
           <a-col :lg="14" :md="12" :sm="24">
-            <a-card title="客户(付款方):" :bordered="true" type="inner" >
+            <a-card :bordered="true" type="inner" >
+              <template slot="title">
+                客户(付款方)：{{ t11Info.tA_FULL_NAME_C }}
+              </template>
             </a-card>
           </a-col>
         </a-row>
