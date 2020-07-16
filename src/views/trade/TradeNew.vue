@@ -346,6 +346,28 @@
                     v-model="t11Info.t0_BUSINESS_RT_TYPE_NM"/>
                 </a-form-item>
               </a-col>
+              <a-col :lg="16" :md="12" :sm="24">
+                <a-form-item>
+                  <a @click="handleShowSQDialog">销售报价</a>
+                </a-form-item>
+                <a-modal
+                  v-model="visibleSQDialog"
+                  title="相关销售报价"
+                  :ok-button-props="{ props: { disabled: false } }"
+                  :cancel-button-props="{ props: { disabled: false } }"
+                  @ok="handleOkSQDialog"
+                  @cancel="handleOkSQDialog"
+                  :width="1024"
+                >
+                  <a-table
+                    :dataSource="PublicT112GetT112List"
+                    :title="setPublicT112GetT112Header"
+                    :rowKey="PublicT112GetT112List => PublicT112GetT112List.t1121_ID"
+                    :columns="PublicT112GetT112columns"
+                    bordered>
+                  </a-table>
+                </a-modal>
+              </a-col>
             </a-row>
             <a-form-item v-if="showSubmit">
               <a-button htmlType="submit" >Submit</a-button>
@@ -819,7 +841,7 @@
   </a-card>
 </template>
 <script>
-import { LoadFlowApproveOpinions, LoadBAppT11, LoadApprovalBasicInfo, GetFormViewCRPT, LoadPublicTA1ForTA1, LoadPublicTA11, LoadBAppT113, LoadPublicT112, LoadPublicT1121, LoadPublicT2121, LoadBAppT21GC, LoadBAppA091BAppT21, LoadAttach, LoadAttachDetail } from '@/api/trade/tradeNew'
+import { LoadFlowApproveOpinions, LoadBAppT11, LoadApprovalBasicInfo, GetFormViewCRPT, LoadPublicTA1ForTA1, LoadPublicTA11, LoadBAppT113, LoadPublicT112, LoadPublicT1121, LoadPublicT2121, LoadBAppT21GC, LoadBAppA091BAppT21, LoadAttach, LoadAttachDetail, ShowPublicT112GetT112 } from '@/api/trade/tradeNew'
 import DetailList from '@/components/tools/DetailList'
 const DetailListItem = DetailList.Item
 export default {
@@ -830,6 +852,7 @@ export default {
     },
     data () {
         return {
+            visibleSQDialog: false,
             queryParamByOne: {
                 biId: this.$route.params.biId
             },
@@ -854,6 +877,10 @@ export default {
                 biId: this.$route.params.biId,
                 awfId: 0
             },
+            queryParamByOne6: {
+                t11Id: 0,
+                comCode: ''
+            },
             t11Info: {
             },
             ta1Info: {
@@ -870,6 +897,7 @@ export default {
             BAppA091BAppT21List2: [],
             AttachList: [],
             AttachDetailList: [],
+            PublicT112GetT112List: [],
             approvalBasicInfo: {
             },
             vendorInfo: [],
@@ -1038,6 +1066,34 @@ export default {
               dataIndex: 'aD_FileName',
               scopedSlots: { customRender: 'attachDetailslot' }
             }],
+            PublicT112GetT112columns: [{
+              title: '销售报价单号',
+              dataIndex: 't0_CASE_NO'
+            }, {
+              title: '销售条款',
+              dataIndex: 't111_SELLING_PRICE_TERM'
+            }, {
+              title: '销售单位',
+              dataIndex: 't1121_PRICING_UNI_NM'
+            }, {
+              title: '销售单位数量',
+              dataIndex: 't1121_PRICING_QTY'
+            }, {
+              title: '销售数量',
+              dataIndex: 't1121_QUOTE_QTY'
+            }, {
+              title: '原销售币种',
+              dataIndex: 't1121_S_CURR'
+            }, {
+              title: '税前销售价格',
+              dataIndex: 't1121_PPRICE_OF_UNI'
+            }, {
+              title: '原采购币种',
+              dataIndex: 't1121_B_CURR'
+            }, {
+              title: '原税前采购价格',
+              dataIndex: 't1121_B_PPRICE_OF_UNI'
+            }],
             setXiaoShouHeader: function () {
               return '销售明细'
             },
@@ -1055,6 +1111,9 @@ export default {
             },
             setAttachDetailHeader: function () {
               return '附件'
+            },
+            setPublicT112GetT112Header: function () {
+              return '销售报价'
             }
         }
     },
@@ -1241,6 +1300,12 @@ export default {
               _parentThis.AttachDetailList = res.reponse
             })
         },
+        queryPublicT112GetT112 () {
+          var _parentThis = this
+            ShowPublicT112GetT112(this.queryParamByOne6).then(res => {
+              _parentThis.PublicT112GetT112List = res.reponse
+            })
+        },
         handleAttachItemClick (awfId) {
           var _parentThis = this
           _parentThis.queryParamByOne5 = {
@@ -1248,6 +1313,17 @@ export default {
               awfId: awfId
           }
           _parentThis.queryAttachDetail()
+        },
+        handleShowSQDialog () {
+          this.queryParamByOne6 = {
+            t11Id: this.t11Info.t11_ID,
+            comCode: this.approvalBasicInfo.bI_CompanyCode
+          }
+          this.queryPublicT112GetT112()
+          this.visibleSQDialog = true
+        },
+        handleOkSQDialog () {
+          this.visibleSQDialog = false
         }
     },
     activated () {

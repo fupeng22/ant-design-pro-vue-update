@@ -112,3 +112,11 @@ export function LoadAttachDetail (parameter) {
     data: parameter
   })
 }
+
+export function ShowPublicT112GetT112 (parameter) {
+  return axios({
+    url: api.ShowPublicT112_GetT112,
+    method: 'post',
+    data: parameter
+  })
+}
