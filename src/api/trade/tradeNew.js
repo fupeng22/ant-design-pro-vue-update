@@ -80,3 +80,19 @@ export function LoadPublicT2121 (parameter) {
     data: parameter
   })
 }
+
+export function LoadBAppT21GC (parameter) {
+  return axios({
+    url: api.LoadBApp_T21_GC,
+    method: 'post',
+    data: parameter
+  })
+}
+
+export function LoadBAppA091BAppT21 (parameter) {
+  return axios({
+    url: api.LoadBApp_A091_BApp_T21,
+    method: 'post',
+    data: parameter
+  })
+}

@@ -521,7 +521,18 @@
             Content of Tab Pane 3
           </a-tab-pane>
           <a-tab-pane key="15" tab="Global Code">
-            Content of Tab Pane 3
+            <a-table :dataSource="bAppT21GCList" :title="setbAppT21GCHeader" :rowKey="bAppT21GCList => bAppT21GCList.t21_ID" :columns="bAppT21GCcolumns" bordered>
+              <template slot="globalCode1" slot-scope="text, record">
+                <a @click="handlebAppT21GCItemClick(record.t21_ID,record.t21_ENDMAKER_CODE)">Global Code</a>
+              </template>
+            </a-table>
+            <a-table :dataSource="BAppA091BAppT21List1" :title="setBAppA091BAppT21Header" :rowKey="BAppA091BAppT21List1 => BAppA091BAppT21List1.A091_PARTNER_CODE" :columns="BAppA091BAppT21columns1" bordered>
+              <template slot="globalCode2" slot-scope="text, record">
+                <a @click="handlebAppT21GCItemClick1(record.T21_ID,record.A091_PARTNER_CODE)">Global Code</a>
+              </template>
+            </a-table>
+            <a-table :dataSource="BAppA091BAppT21List2" :title="setBAppA091BAppT21Header" :rowKey="BAppA091BAppT21List2 => BAppA091BAppT21List1.a091_ID" :columns="BAppA091BAppT21columns2" bordered>
+            </a-table>
           </a-tab-pane>
         </a-tabs>
       </a-tab-pane>
@@ -757,7 +768,7 @@
   </a-card>
 </template>
 <script>
-import { LoadFlowApproveOpinions, LoadBAppT11, LoadApprovalBasicInfo, GetFormViewCRPT, LoadPublicTA1ForTA1, LoadPublicTA11, LoadBAppT113, LoadPublicT112, LoadPublicT1121, LoadPublicT2121 } from '@/api/trade/tradeNew'
+import { LoadFlowApproveOpinions, LoadBAppT11, LoadApprovalBasicInfo, GetFormViewCRPT, LoadPublicTA1ForTA1, LoadPublicTA11, LoadBAppT113, LoadPublicT112, LoadPublicT1121, LoadPublicT2121, LoadBAppT21GC, LoadBAppA091BAppT21 } from '@/api/trade/tradeNew'
 import DetailList from '@/components/tools/DetailList'
 const DetailListItem = DetailList.Item
 export default {
@@ -783,6 +794,11 @@ export default {
                 biId: this.$route.params.biId,
                 t112Id: 0
             },
+            queryParamByOne4: {
+                biId: this.$route.params.biId,
+                t21Id: 0,
+                partnerCode: ''
+            },
             t11Info: {
             },
             ta1Info: {
@@ -794,6 +810,9 @@ export default {
             },
             t1121List: [],
             t2121List: [],
+            bAppT21GCList: [],
+            BAppA091BAppT21List1: [],
+            BAppA091BAppT21List2: [],
             approvalBasicInfo: {
             },
             vendorInfo: [],
@@ -885,11 +904,70 @@ export default {
               title: '税后总额(本位币)',
               dataIndex: 't1121_S_TPRICE_OF_UNI_total'
             }],
+            bAppT21GCcolumns: [{
+              title: '',
+              dataIndex: 't21_ID',
+              scopedSlots: { customRender: 'globalCode1' }
+            }, {
+              title: '工厂',
+              dataIndex: 't21_ENDMAKER_FULL_NAME_C'
+            }, {
+              title: '采购协议名称',
+              dataIndex: 't21_AGREEMENT_NM'
+            }],
+            BAppA091BAppT21columns1: [{
+              title: '伙伴代码',
+              dataIndex: 'A091_PARTNER_CODE',
+              scopedSlots: { customRender: 'globalCode2' }
+            }, {
+              title: '全称(中/英文)',
+              dataIndex: 'P000_FULL_NAME_C'
+            }, {
+              title: '全称(英文)',
+              dataIndex: 'P000_FULL_NAME_F'
+            }, {
+              title: '简称',
+              dataIndex: 'A091_GLOBAL_ENG_AB'
+            }, {
+              title: 'G.C 指定',
+              dataIndex: 'status'
+            }],
+            BAppA091BAppT21columns2: [{
+              title: '伙伴类型',
+              dataIndex: 'a091_PARTNER_TYPE_NM'
+            }, {
+              title: 'GC代码',
+              dataIndex: 'a091_GLOBAL_CODE'
+            }, {
+              title: '全称',
+              dataIndex: 'a091_GLOBAL_ENG_NM'
+            }, {
+              title: '简称',
+              dataIndex: 'a091_GLOBAL_ENG_AB'
+            }, {
+              title: '所在地址',
+              dataIndex: 'a091_GLOBAL_ENG_ADR'
+            }, {
+              title: '电话号码',
+              dataIndex: 'a091_GLOBAL_TEL_NO'
+            }, {
+              title: '传真号码',
+              dataIndex: 'a091_GLOBAL_FAX_NO'
+            }, {
+              title: 'Control Divion',
+              dataIndex: 'a091_GLOBAL_FAX_NO'
+            }],
             setXiaoShouHeader: function () {
               return '销售明细'
             },
             setCaiGouHeader: function () {
               return '采购明细'
+            },
+            setbAppT21GCHeader: function () {
+              return '采购协议'
+            },
+            setBAppA091BAppT21Header: function () {
+              return 'Global Code'
             }
         }
     },
@@ -979,6 +1057,90 @@ export default {
             LoadPublicT2121(this.queryParamByOne3).then(res => {
                 _parentThis.t2121List = res.reponse
             })
+        },
+        queryBAppT21GC () {
+          var _parentThis = this
+            LoadBAppT21GC(this.queryParamByOne).then(res => {
+                _parentThis.bAppT21GCList = res.reponse
+            })
+        },
+        queryBAppA091BAppT21 () {
+          var _parentThis = this
+            LoadBAppA091BAppT21(this.queryParamByOne4).then(res => {
+                var tmpBAppA091BAppT21List1 = res.reponse
+                var A091Grid = []
+                for (var j = 0; j < tmpBAppA091BAppT21List1.length; j++) {
+                  var item = tmpBAppA091BAppT21List1[j]
+                  var num = 0
+                  for (var i = 0; i < A091Grid.length; i++) {
+                      if (A091Grid[i].A091_PARTNER_CODE === item.a091_PARTNER_CODE) {
+                          num++
+                          break
+                      }
+                  }
+                  if (num === 0) {
+                      var entity = {
+                          A091_PARTNER_CODE: item.a091_PARTNER_CODE,
+                          A091_GLOBAL_CODE: item.a091_GLOBAL_CODE,
+                          A091_COMP_CODE: item.a091_COMP_CODE,
+                          A091_GLOBAL_ENG_NM: item.a091_GLOBAL_ENG_NM,
+                          A091_GLOBAL_ENG_AB: item.a091_GLOBAL_ENG_AB,
+                          A091_GLOBAL_ENG_ADR: item.a091_GLOBAL_ENG_ADR,
+                          A091_GLOBAL_TEL_NO: item.a091_GLOBAL_TEL_NO,
+                          A091_GLOBAL_FAX_NO: item.a091_GLOBAL_FAX_NO,
+                          P000_FULL_NAME_C: item.p000_FULL_NAME_C,
+                          P000_FULL_NAME_F: item.p000_FULL_NAME_F,
+                          P000_ABBR_NAME: item.p000_ABBR_NAME,
+                          A091_ISNEWADD: item.a091_ISNEWADD,
+                          T21_ID: this.queryParamByOne4.t21Id
+                      }
+                      A091Grid.push(entity)
+                  }
+                }
+
+                for (var k = 0; k < A091Grid.length; k++) {
+                  var item1 = A091Grid[k]
+                  var b = 0
+                  var a = 0
+                  for (var m = 0; m < res.reponse.length; m++) {
+                      if (res.reponse[m].a091_PARTNER_CODE === item1.A091_PARTNER_CODE) {
+                          b++
+                          if (res.reponse[m].a091_GLOBAL_CODE.length > 0 || res.reponse[m].a091_ISNEWADD === 3 || res.reponse[m].a091_ISNEWADD === 7) {
+                              a++
+                          }
+                      }
+                  }
+                  A091Grid[k].status = a + '/' + b
+                }
+                _parentThis.BAppA091BAppT21List1 = A091Grid
+            })
+        },
+        queryBAppA091BAppT21detail () {
+          var _parentThis = this
+            LoadBAppA091BAppT21(this.queryParamByOne4).then(res => {
+              _parentThis.BAppA091BAppT21List2 = res.reponse
+            })
+        },
+        handlebAppT21GCItemClick (t21Id, endmakerCode) {
+          var _parentThis = this
+          _parentThis.queryParamByOne4 = {
+              biId: this.$route.params.biId,
+              t21Id: t21Id,
+              partnerCode: ''
+          }
+          _parentThis.queryBAppA091BAppT21()
+
+          _parentThis.BAppA091BAppT21List2 = []
+        },
+        handlebAppT21GCItemClick1 (t21Id, endmakerCode) {
+          var _parentThis = this
+          _parentThis.queryParamByOne4 = {
+              biId: this.$route.params.biId,
+              t21Id: t21Id,
+              partnerCode: endmakerCode
+          }
+          debugger
+          _parentThis.queryBAppA091BAppT21detail()
         }
     },
     activated () {
@@ -991,6 +1153,7 @@ export default {
       this.queryApprovalBasicInfo()
       this.queryPublicTA11()
       this.queryBAppT113()
+      this.queryBAppT21GC()
     }
 }
 </script>
