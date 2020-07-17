@@ -120,3 +120,19 @@ export function ShowPublicT112GetT112 (parameter) {
     data: parameter
   })
 }
+
+export function LoadPublicTA9 (parameter) {
+  return axios({
+    url: api.LoadPublic_TA9,
+    method: 'post',
+    data: parameter
+  })
+}
+
+export function LoadPublicTA91 (parameter) {
+  return axios({
+    url: api.LoadPublic_TA91,
+    method: 'post',
+    data: parameter
+  })
+}

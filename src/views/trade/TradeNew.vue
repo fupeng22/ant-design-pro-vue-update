@@ -582,7 +582,13 @@
             Content of Tab Pane 3
           </a-tab-pane>
           <a-tab-pane key="14" tab="客户授信">
-            Content of Tab Pane 3
+            <a-table :dataSource="PublicTA9List" :title="setPublicTA9Header" :rowKey="PublicTA9List => PublicTA9List.tA9_ID" :columns="PublicTA9columns" bordered>
+              <template slot="TA9" slot-scope="text, record">
+                <a @click="handleTA9ItemClick(record.tA9_ID)">授信申请</a>
+              </template>
+            </a-table>
+            <a-table :dataSource="PublicTA91List" :title="setPublicTA91Header" :rowKey="PublicTA91List => PublicTA91List.tA9_ID" :columns="PublicTA91columns" bordered>
+            </a-table>
           </a-tab-pane>
           <a-tab-pane key="15" tab="Global Code">
             <a-table :dataSource="bAppT21GCList" :title="setbAppT21GCHeader" :rowKey="bAppT21GCList => bAppT21GCList.t21_ID" :columns="bAppT21GCcolumns" bordered>
@@ -841,7 +847,7 @@
   </a-card>
 </template>
 <script>
-import { LoadFlowApproveOpinions, LoadBAppT11, LoadApprovalBasicInfo, GetFormViewCRPT, LoadPublicTA1ForTA1, LoadPublicTA11, LoadBAppT113, LoadPublicT112, LoadPublicT1121, LoadPublicT2121, LoadBAppT21GC, LoadBAppA091BAppT21, LoadAttach, LoadAttachDetail, ShowPublicT112GetT112 } from '@/api/trade/tradeNew'
+import { LoadFlowApproveOpinions, LoadBAppT11, LoadApprovalBasicInfo, GetFormViewCRPT, LoadPublicTA1ForTA1, LoadPublicTA11, LoadBAppT113, LoadPublicT112, LoadPublicT1121, LoadPublicT2121, LoadBAppT21GC, LoadBAppA091BAppT21, LoadAttach, LoadAttachDetail, ShowPublicT112GetT112, LoadPublicTA9, LoadPublicTA91 } from '@/api/trade/tradeNew'
 import DetailList from '@/components/tools/DetailList'
 const DetailListItem = DetailList.Item
 export default {
@@ -881,6 +887,14 @@ export default {
                 t11Id: 0,
                 comCode: ''
             },
+            queryParamByOne7: {
+                biId: 0,
+                payerCode: ''
+            },
+            queryParamByOne8: {
+                biId: 0,
+                ta9Id: 0
+            },
             t11Info: {
             },
             ta1Info: {
@@ -898,6 +912,8 @@ export default {
             AttachList: [],
             AttachDetailList: [],
             PublicT112GetT112List: [],
+            PublicTA9List: [],
+            PublicTA91List: [],
             approvalBasicInfo: {
             },
             vendorInfo: [],
@@ -1066,6 +1082,60 @@ export default {
               dataIndex: 'aD_FileName',
               scopedSlots: { customRender: 'attachDetailslot' }
             }],
+            PublicTA9columns: [{
+              title: '',
+              dataIndex: 'tA9_ONETIME_TRADE'
+            }, {
+              title: '',
+              dataIndex: 'tA9_ID',
+              scopedSlots: { customRender: 'TA9' }
+            }, {
+              title: '交易部门',
+              dataIndex: 'tA9_TRANSACTION_ORG_CODE'
+            }, {
+              title: '付款方',
+              dataIndex: 'fulL_NAME_C'
+            }, {
+              title: '当前申请额度',
+              dataIndex: 'tA9_APP_STD_VAL'
+            }, {
+              title: '已申请额度(CNY)',
+              dataIndex: 'tA9_APP_STD_VAL_TBA'
+            }],
+            PublicTA91columns: [{
+              title: '',
+              dataIndex: 'tA91_ID'
+            }, {
+              title: '申请单号',
+              dataIndex: 'tA91_BI_CODE'
+            }, {
+              title: '上回额度(CNY)',
+              dataIndex: 'tA91_BEF_APP_STD_VAL'
+            }, {
+              title: '本回额度(CNY)',
+              dataIndex: 'tA91_AFT_APP_STD_VAL'
+            }, {
+              title: '本回变化(CNY)',
+              dataIndex: 'tA91_DLT_APP_STD_VAL'
+            }, {
+              title: '有效期始',
+              dataIndex: 'tA91_EFF_DATE'
+            }, {
+              title: '有效期止',
+              dataIndex: 'tA91_EXP_DATE'
+            }, {
+              title: '授信池全体额度(CNY)',
+              dataIndex: 'tA91_CREDIT_STD_TOT_VAL'
+            }, {
+              title: '授信池已授额度(CNY)',
+              dataIndex: 'tA91_CREDIT_STD_APP_VAL'
+            }, {
+              title: '保全需要标记',
+              dataIndex: 'tA91_GUARANTEE_YN_NM'
+            }, {
+              title: '客户同意保全',
+              dataIndex: 'tA91_CUSTOMER_GUARANTEE_NM'
+            }],
             PublicT112GetT112columns: [{
               title: '销售报价单号',
               dataIndex: 't0_CASE_NO'
@@ -1114,6 +1184,12 @@ export default {
             },
             setPublicT112GetT112Header: function () {
               return '销售报价'
+            },
+            setPublicTA9Header: function () {
+              return '授信申请(TA9)'
+            },
+            setPublicTA91Header: function () {
+              return '授信申请(TA91)'
             }
         }
     },
@@ -1140,6 +1216,12 @@ export default {
                   t111Id: _parentThis.t11Info.t11_T111_ID
                 }
                 _parentThis.queryPublicTA1ForTA1()
+
+                _parentThis.queryParamByOne7 = {
+                  biId: _parentThis.$route.params.biId,
+                  payerCode: _parentThis.t11Info.tA_PAYER_CODE
+                }
+                _parentThis.queryPublicTA9()
             })
         },
         queryApprovalBasicInfo () {
@@ -1324,6 +1406,25 @@ export default {
         },
         handleOkSQDialog () {
           this.visibleSQDialog = false
+        },
+        queryPublicTA9 () {
+          var _parentThis = this
+            LoadPublicTA9(this.queryParamByOne7).then(res => {
+              _parentThis.PublicTA9List = res.reponse
+            })
+        },
+        queryPublicTA91 () {
+          var _parentThis = this
+            LoadPublicTA91(this.queryParamByOne8).then(res => {
+              _parentThis.PublicTA91List = res.reponse
+            })
+        },
+        handleTA9ItemClick (ta9Id) {
+          this.queryParamByOne8 = {
+            biId: this.approvalBasicInfo.bI_ID,
+            ta9Id: ta9Id
+          }
+          this.queryPublicTA91()
         }
     },
     activated () {
