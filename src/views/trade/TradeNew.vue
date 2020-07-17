@@ -2,6 +2,41 @@
   <a-card :bordered="true">
     <template slot="title">
       <div>
+        <a-page-header
+          :ghost="false"
+          title="Title"
+          sub-title="This is a subtitle"
+          @back="() => $router.go(-1)"
+        >
+          <template slot="extra">
+            <a-button key="3">
+              Operation
+            </a-button>
+            <a-button key="2">
+              Operation
+            </a-button>
+            <a-button key="1" type="primary">
+              Primary
+            </a-button>
+          </template>
+          <a-descriptions size="small" :column="3">
+            <a-descriptions-item label="Created">
+              Lili Qu
+            </a-descriptions-item>
+            <a-descriptions-item label="Association">
+              <a>421421</a>
+            </a-descriptions-item>
+            <a-descriptions-item label="Creation Time">
+              2017-01-10
+            </a-descriptions-item>
+            <a-descriptions-item label="Effective Time">
+              2017-10-10
+            </a-descriptions-item>
+            <a-descriptions-item label="Remarks">
+              Gonghu Road, Xihu District, Hangzhou, Zhejiang, China
+            </a-descriptions-item>
+          </a-descriptions>
+        </a-page-header>
         <a-row :gutter="1">
           <a-col :lg="4" :md="12" :sm="24">
             <h2>交易决裁新规</h2>
@@ -579,7 +614,7 @@
             </a-form>
           </a-tab-pane>
           <a-tab-pane key="13" tab="采购协议">
-            Content of Tab Pane 3
+            <show-pl></show-pl>
           </a-tab-pane>
           <a-tab-pane key="14" tab="客户授信">
             <a-table :dataSource="PublicTA9List" :title="setPublicTA9Header" :rowKey="PublicTA9List => PublicTA9List.tA9_ID" :columns="PublicTA9columns" bordered>
@@ -853,12 +888,14 @@
 <script>
 import { LoadFlowApproveOpinions, LoadBAppT11, LoadApprovalBasicInfo, GetFormViewCRPT, LoadPublicTA1ForTA1, LoadPublicTA11, LoadBAppT113, LoadPublicT112, LoadPublicT1121, LoadPublicT2121, LoadBAppT21GC, LoadBAppA091BAppT21, LoadAttach, LoadAttachDetail, ShowPublicT112GetT112, LoadPublicTA9, LoadPublicTA91 } from '@/api/trade/tradeNew'
 import DetailList from '@/components/tools/DetailList'
+import ShowPl from '@/components/Trade/ShowPl'
 const DetailListItem = DetailList.Item
 export default {
     name: 'TradeNew',
     components: {
       DetailList,
-      DetailListItem
+      DetailListItem,
+      ShowPl
     },
     data () {
         return {
