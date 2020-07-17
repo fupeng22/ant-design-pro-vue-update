@@ -583,6 +583,10 @@
           </a-tab-pane>
           <a-tab-pane key="14" tab="客户授信">
             <a-table :dataSource="PublicTA9List" :title="setPublicTA9Header" :rowKey="PublicTA9List => PublicTA9List.tA9_ID" :columns="PublicTA9columns" bordered>
+              <template slot="TA9OneTime" slot-scope="text, record">
+                <span v-show="record.tA9_ONETIME_TRADE==1">非一次性</span>
+                <span v-show="record.tA9_ONETIME_TRADE==2">一次性</span>
+              </template>
               <template slot="TA9" slot-scope="text, record">
                 <a @click="handleTA9ItemClick(record.tA9_ID)">授信申请</a>
               </template>
@@ -1084,7 +1088,8 @@ export default {
             }],
             PublicTA9columns: [{
               title: '',
-              dataIndex: 'tA9_ONETIME_TRADE'
+              dataIndex: 'tA9_ONETIME_TRADE',
+              scopedSlots: { customRender: 'TA9OneTime' }
             }, {
               title: '',
               dataIndex: 'tA9_ID',
