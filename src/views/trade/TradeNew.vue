@@ -39,7 +39,7 @@
         </a-row>
       </div>
     </template>
-    <a-tabs type="card" @change="callback">
+    <a-tabs type="card" @change="callbackMain">
       <a-tab-pane key="1" tab="概要">
         <a-row :gutter="3">
           <a-col :lg="10" :md="12" :sm="24">
@@ -374,7 +374,7 @@
             </a-form-item>
           </a-form>
         </a-card>
-        <a-tabs type="card" @change="callback">
+        <a-tabs type="card" @change="callbackBase">
           <a-tab-pane key="11" tab="理由说明">
             <a-textarea
               placeholder=""
@@ -1020,7 +1020,7 @@ export default {
               dataIndex: 'pgP_RATE'
             }, {
               title: '本位币',
-              dataIndex: 'pgP_RATE',
+              dataIndex: '',
               scopedSlots: { customRender: 'pgP_RATE' }
             }, {
               title: '税前总额(本位币)',
@@ -1336,18 +1336,6 @@ export default {
             var _parentThis = this
             LoadBAppT11(this.queryParamByOne).then(res => {
                 _parentThis.t11Info = res.reponse[0]
-
-                _parentThis.queryParamByOne2 = {
-                  biId: _parentThis.$route.params.biId,
-                  t111Id: _parentThis.t11Info.t11_T111_ID
-                }
-                _parentThis.queryPublicTA1ForTA1()
-
-                _parentThis.queryParamByOne7 = {
-                  biId: _parentThis.$route.params.biId,
-                  payerCode: _parentThis.t11Info.tA_PAYER_CODE
-                }
-                _parentThis.queryPublicTA9()
             })
         },
         queryApprovalBasicInfo () {
@@ -1377,21 +1365,6 @@ export default {
           var _parentThis = this
             LoadBAppT113(this.queryParamByOne).then(res => {
                 _parentThis.t113Info = res.reponse
-
-                if (_parentThis.t113Info.length > 0) {
-                  _parentThis.queryParamByOne3 = {
-                    biId: _parentThis.$route.params.biId,
-                    t112Id: _parentThis.t113Info[0].t113_T112_ID
-                  }
-
-                  _parentThis.queryPublicT112()
-                  _parentThis.queryPublicT1121()
-                  _parentThis.queryPublicT2121()
-                } else {
-                  _parentThis.t112Info = []
-                  _parentThis.t1121List = []
-                  _parentThis.t2121List = []
-                }
             })
         },
         queryPublicT112 () {
@@ -1579,6 +1552,70 @@ export default {
             this.t8Id = t8Id
           }
           this.$refs.showplchild.queryBAppT81()
+        },
+        callbackMain (key) {
+          console.info(key)
+          switch (key) {
+            case '1':
+
+              break
+            case '2':
+
+              break
+            case '3':
+              var _parentThis = this
+              if (_parentThis.t113Info.length > 0) {
+                _parentThis.queryParamByOne3 = {
+                  biId: _parentThis.$route.params.biId,
+                  t112Id: _parentThis.t113Info[0].t113_T112_ID
+                }
+
+                _parentThis.queryPublicT112()
+                _parentThis.queryPublicT1121()
+                _parentThis.queryPublicT2121()
+              } else {
+                _parentThis.t112Info = []
+                _parentThis.t1121List = []
+                _parentThis.t2121List = []
+              }
+              break
+            case '4':
+              this.queryAttach()
+              break
+            case '5':
+              this.queryFlowApproveOpinions()
+              break
+          }
+        },
+        callbackBase (key) {
+          console.info(key)
+          var _parentThis = this
+          switch (key) {
+            case '11':
+
+              break
+            case '12':
+              this.queryPublicTA11()
+              _parentThis.queryParamByOne2 = {
+                biId: _parentThis.$route.params.biId,
+                t111Id: _parentThis.t11Info.t11_T111_ID
+              }
+              _parentThis.queryPublicTA1ForTA1()
+              break
+            case '13':
+              this.queryBAppT21()
+              break
+            case '14':
+              _parentThis.queryParamByOne7 = {
+                biId: _parentThis.$route.params.biId,
+                payerCode: _parentThis.t11Info.tA_PAYER_CODE
+              }
+              _parentThis.queryPublicTA9()
+              break
+            case '15':
+              this.queryBAppT21GC()
+              break
+          }
         }
     },
     activated () {
@@ -1586,14 +1623,9 @@ export default {
       this.queryParamByOne = {
         biId: this.$route.params.biId
       }
-      this.queryFlowApproveOpinions()
       this.queryBApp_T11()
       this.queryApprovalBasicInfo()
-      this.queryPublicTA11()
       this.queryBAppT113()
-      this.queryBAppT21GC()
-      this.queryAttach()
-      this.queryBAppT21()
     }
 }
 </script>

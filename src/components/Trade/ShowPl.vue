@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-row :gutter="3">
+    <a-row :gutter="1">
       <a-col :lg="18" :md="12" :sm="24">
         <a-card title="商品PL" :bordered="true" type="inner" >
           <a-table :dataSource="t81List" :rowKey="t81List => t81List.t81_ID" :columns="t81columns" bordered>
@@ -19,7 +19,7 @@
         </a-card>
       </a-col>
     </a-row>
-    <a-row :gutter="3">
+    <a-row :gutter="1">
       <a-card title="PL明细项目" :bordered="true" type="inner" >
         <a-table :dataSource="t811List" :rowKey="t811List => t811List.t81_ID" :columns="t811columns" bordered>
         </a-table>
