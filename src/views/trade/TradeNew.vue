@@ -2,41 +2,6 @@
   <a-card :bordered="true">
     <template slot="title">
       <div>
-        <a-page-header
-          :ghost="false"
-          title="Title"
-          sub-title="This is a subtitle"
-          @back="() => $router.go(-1)"
-        >
-          <template slot="extra">
-            <a-button key="3">
-              Operation
-            </a-button>
-            <a-button key="2">
-              Operation
-            </a-button>
-            <a-button key="1" type="primary">
-              Primary
-            </a-button>
-          </template>
-          <a-descriptions size="small" :column="3">
-            <a-descriptions-item label="Created">
-              Lili Qu
-            </a-descriptions-item>
-            <a-descriptions-item label="Association">
-              <a>421421</a>
-            </a-descriptions-item>
-            <a-descriptions-item label="Creation Time">
-              2017-01-10
-            </a-descriptions-item>
-            <a-descriptions-item label="Effective Time">
-              2017-10-10
-            </a-descriptions-item>
-            <a-descriptions-item label="Remarks">
-              Gonghu Road, Xihu District, Hangzhou, Zhejiang, China
-            </a-descriptions-item>
-          </a-descriptions>
-        </a-page-header>
         <a-row :gutter="1">
           <a-col :lg="4" :md="12" :sm="24">
             <h2>交易决裁新规</h2>
@@ -614,7 +579,17 @@
             </a-form>
           </a-tab-pane>
           <a-tab-pane key="13" tab="采购协议">
-            <show-pl></show-pl>
+            <a-table :dataSource="T21List" :title="setT21Header" :rowKey="T21List => T21List.t21_ID" :columns="T21columns" bordered>
+              <template slot="t21slot" slot-scope="text, record">
+                <a @click="handleT21ItemClick(record.t21_ID)">交易商品</a>
+              </template>
+            </a-table>
+            <a-table :dataSource="T8List" :title="setT8Header" :rowKey="T8List => T8List.t8_ID" :columns="T8columns" bordered>
+              <template slot="t8slot" slot-scope="text, record">
+                <a @click="handleT8ItemClick(record.t8_ID)">商品PL</a>
+              </template>
+            </a-table>
+            <show-pl :t8Id="t8Id" :biId="this.$route.params.biId" ref="showplchild"></show-pl>
           </a-tab-pane>
           <a-tab-pane key="14" tab="客户授信">
             <a-table :dataSource="PublicTA9List" :title="setPublicTA9Header" :rowKey="PublicTA9List => PublicTA9List.tA9_ID" :columns="PublicTA9columns" bordered>
@@ -886,7 +861,7 @@
   </a-card>
 </template>
 <script>
-import { LoadFlowApproveOpinions, LoadBAppT11, LoadApprovalBasicInfo, GetFormViewCRPT, LoadPublicTA1ForTA1, LoadPublicTA11, LoadBAppT113, LoadPublicT112, LoadPublicT1121, LoadPublicT2121, LoadBAppT21GC, LoadBAppA091BAppT21, LoadAttach, LoadAttachDetail, ShowPublicT112GetT112, LoadPublicTA9, LoadPublicTA91 } from '@/api/trade/tradeNew'
+import { LoadFlowApproveOpinions, LoadBAppT11, LoadApprovalBasicInfo, GetFormViewCRPT, LoadPublicTA1ForTA1, LoadPublicTA11, LoadBAppT113, LoadPublicT112, LoadPublicT1121, LoadPublicT2121, LoadBAppT21GC, LoadBAppA091BAppT21, LoadAttach, LoadAttachDetail, ShowPublicT112GetT112, LoadPublicTA9, LoadPublicTA91, LoadBAppT21, LoadBAppT8 } from '@/api/trade/tradeNew'
 import DetailList from '@/components/tools/DetailList'
 import ShowPl from '@/components/Trade/ShowPl'
 const DetailListItem = DetailList.Item
@@ -936,6 +911,11 @@ export default {
                 biId: 0,
                 ta9Id: 0
             },
+            queryParamByOne9: {
+                biId: 0,
+                t21Id: 0
+            },
+            t8Id: 0,
             t11Info: {
             },
             ta1Info: {
@@ -955,6 +935,8 @@ export default {
             PublicT112GetT112List: [],
             PublicTA9List: [],
             PublicTA91List: [],
+            T21List: [],
+            T8List: [],
             approvalBasicInfo: {
             },
             vendorInfo: [],
@@ -1206,6 +1188,102 @@ export default {
               title: '原税前采购价格',
               dataIndex: 't1121_B_PPRICE_OF_UNI'
             }],
+            T21columns: [{
+              title: '',
+              dataIndex: 't21_ID',
+              scopedSlots: { customRender: 't21slot' }
+            }, {
+              title: '采购条款',
+              dataIndex: 't21_T211_ID'
+            }, {
+              title: '采购主协议',
+              dataIndex: 't21_T211_ID',
+              sorter: true
+            }, {
+              title: '工厂',
+              dataIndex: 't21_ENDMAKER_FULL_NAME_C'
+            }, {
+              title: '工厂代码',
+              dataIndex: 't21_ENDMAKER_CODE'
+            }, {
+              title: '采购币种',
+              dataIndex: 't211_BUYING_CURR'
+            }, {
+              title: '采购价格条款',
+              dataIndex: 't211_BUYING_PRICE_TERM'
+            }, {
+              title: '订单接受方代码',
+              dataIndex: 't211_ORDEREE_CODE'
+            }, {
+              title: '订单接受方',
+              dataIndex: 't21_ORDEREE_FULL_NAME_C'
+            }, {
+              title: '支付行为',
+              dataIndex: 't21_ORDEREE_FULL_NAME_C'
+            }, {
+              title: '购货基准',
+              dataIndex: 't21_PURCHASE_RULE_NM'
+            }, {
+              title: '购货单类型',
+              dataIndex: 't21_PURCHASE_NOTE_TYPE_NM'
+            }, {
+              title: '品质责任方',
+              dataIndex: 't21_QLIABILITY_PARTY_NM'
+            }, {
+              title: '品质保证书',
+              dataIndex: 't21_QLIABILITY_PARTY_NM'
+            }, {
+              title: '装配责任方',
+              dataIndex: 't21_ALIABILITY_PARTY_NM'
+            }, {
+              title: '有效性',
+              dataIndex: 't21_VALIDITY_NM'
+            }],
+            T8columns: [{
+              title: '',
+              dataIndex: 't8_ID',
+              scopedSlots: { customRender: 't8slot' }
+            }, {
+              title: '物流信息',
+              dataIndex: 't8_T19_ID'
+            }, {
+              title: '配送周期',
+              dataIndex: 't8_MIN_STEP_LEADTIME',
+              sorter: true
+            }, {
+              title: '交易类型',
+              dataIndex: 't8_TRADE_TYPE_NM'
+            }, {
+              title: '交易模式',
+              dataIndex: 't8_TRADE_MODE_NM'
+            }, {
+              title: 'BU名称',
+              dataIndex: 't8_BU_CODE_NM'
+            }, {
+              title: '商品代码',
+              dataIndex: 't8_CODE'
+            }, {
+              title: '验收天数',
+              dataIndex: 't8_DAYS_BEF_ACCEPTANCE'
+            }, {
+              title: '库存条款',
+              dataIndex: 't8_TC1_ID'
+            }, {
+              title: '在库天数',
+              dataIndex: 't8_DAYS_OF_STOCK'
+            }, {
+              title: '对方责任比例',
+              dataIndex: 't8_LIABILITY_RATIO'
+            }, {
+              title: '有效期始',
+              dataIndex: 't8_EFF_DATE'
+            }, {
+              title: '有效期止',
+              dataIndex: 't8_EXP_DATE'
+            }, {
+              title: '有效性',
+              dataIndex: 't8_VALIDITY_NM'
+            }],
             setXiaoShouHeader: function () {
               return '销售明细'
             },
@@ -1232,6 +1310,12 @@ export default {
             },
             setPublicTA91Header: function () {
               return '授信申请(TA91)'
+            },
+            setT21Header: function () {
+              return '采购协议'
+            },
+            setT8Header: function () {
+              return '交易商品'
             }
         }
     },
@@ -1467,6 +1551,34 @@ export default {
             ta9Id: ta9Id
           }
           this.queryPublicTA91()
+        },
+        queryBAppT21 () {
+          var _parentThis = this
+            LoadBAppT21(this.queryParamByOne).then(res => {
+              _parentThis.T21List = res.reponse
+            })
+        },
+        handleT21ItemClick (t21Id) {
+          this.queryParamByOne9 = {
+            biId: this.approvalBasicInfo.bI_ID,
+            t21Id: t21Id
+          }
+          this.queryBAppT8()
+        },
+        queryBAppT8 () {
+          var _parentThis = this
+            LoadBAppT8(this.queryParamByOne9).then(res => {
+              _parentThis.T8List = res.reponse
+            })
+        },
+        handleT8ItemClick (t8Id) {
+          debugger
+          if (this.t113Info && this.t113Info.length && this.t113Info.length > 0 && this.t113Info[0] && this.t113Info[0].t113_ID && this.t113Info[0].t113_ID > 0) {
+            this.t8Id = 0
+          } else {
+            this.t8Id = t8Id
+          }
+          this.$refs.showplchild.queryBAppT81()
         }
     },
     activated () {
@@ -1481,6 +1593,7 @@ export default {
       this.queryBAppT113()
       this.queryBAppT21GC()
       this.queryAttach()
+      this.queryBAppT21()
     }
 }
 </script>

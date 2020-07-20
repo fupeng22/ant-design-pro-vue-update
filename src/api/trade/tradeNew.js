@@ -136,3 +136,43 @@ export function LoadPublicTA91 (parameter) {
     data: parameter
   })
 }
+
+export function LoadBAppT21 (parameter) {
+  return axios({
+    url: api.LoadBApp_T21,
+    method: 'post',
+    data: parameter
+  })
+}
+
+export function LoadBAppT8 (parameter) {
+  return axios({
+    url: api.LoadBApp_T8,
+    method: 'post',
+    data: parameter
+  })
+}
+
+export function LoadBAppT81 (parameter) {
+  return axios({
+    url: api.LoadBApp_T81,
+    method: 'post',
+    data: parameter
+  })
+}
+
+export function LoadBAppT81LCR (parameter) {
+  return axios({
+    url: api.LoadBApp_T81_LCR,
+    method: 'post',
+    data: parameter
+  })
+}
+
+export function LoadBAppT811 (parameter) {
+  return axios({
+    url: api.LoadBApp_T811,
+    method: 'post',
+    data: parameter
+  })
+}
