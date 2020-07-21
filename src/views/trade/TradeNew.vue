@@ -956,7 +956,8 @@ export default {
               dataIndex: 'app_Remark'
             }, {
               title: '审批意见',
-              dataIndex: 'app_Opinion'
+              dataIndex: 'app_Opinion',
+              ellipsis: true
             }],
             ta11columns: [{
               title: '支付比例%',
