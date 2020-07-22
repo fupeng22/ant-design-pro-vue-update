@@ -1320,6 +1320,43 @@ export default {
             }
         }
     },
+    watch: {
+      vendorInfo: function (val) {
+        debugger
+        var re=/<a[^>]*href=['"]([^"]*)['"][^>]*>(.*?)<\/a>/g
+
+        var arrText=[];
+        while(re.exec(val[0].productsInfo)!=null){ 
+          arrText.push(RegExp.$2+'\n')
+        }
+        var Text=arrText[0]
+
+        var arrHtml=[];
+        while(re.exec(val[0].productsInfo)!=null){ 
+          arrHtml.push(RegExp.$1+'\n')
+        }
+        var textHtml=arrHtml[0]
+
+        // /TradeNew/ShowPL?t8Id=77629&t11Id=25900' data-toggle='modal'  data-target='#myPLDialog↵
+        var t8IdTmp=((((textHtml.split(' '))[0].split('?'))[1].split('&'))[0].split('='))[1]
+
+        var contentHtml = ''
+
+        contentHtml = contentHtml + ' <a-modal '
+        contentHtml = contentHtml + ' v-model="visibleSQDialog" '
+        contentHtml = contentHtml + ' title="相关销售报价" '
+        contentHtml = contentHtml + ' :ok-button-props="{ props: { disabled: false } }" '
+        contentHtml = contentHtml + ' :cancel-button-props="{ props: { disabled: false } }" '
+        contentHtml = contentHtml + '  @ok="handleOkSQDialog" '
+        contentHtml = contentHtml + ' @cancel="handleOkSQDialog" '
+        contentHtml = contentHtml + ' :width="1024"> '
+        contentHtml = contentHtml + '  '
+        contentHtml = contentHtml + ' </a-modal> '
+
+        val[0].productsInfo.replace(/(<\/?a.*?>)|(<\/?span.*?>)/g, '').replace(Text,'fff')
+
+      }
+    },
     methods: {
         queryFlowApproveOpinions () {
             var _parentThis = this

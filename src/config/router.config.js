@@ -93,7 +93,18 @@ export const constantRouterMap = [
       }
     ]
   },
-
+  {
+    path: '/trade',
+    component: BlankLayout,
+    redirect: '/trade/ShowPLPage',
+    children: [
+      {
+        path: 'ShowPLPage',
+        name: 'ShowPLPage',
+        component: () => import('@/views/trade/ShowPLPage')
+      }
+    ]
+  },
   {
     path: '/404',
     component: () => import(/* webpackChunkName: "fail" */ '@/views/exception/404')
