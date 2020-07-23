@@ -64,8 +64,19 @@
             <detail-list-item term=""><span v-html="item.vender_Name"></span></detail-list-item>
             <detail-list-item term=""><span v-html="item.vender_SellingAgreement"></span></detail-list-item>
             <detail-list-item term=""><span v-html="item.payer_Condition"></span></detail-list-item>
-            <detail-list-item term=""><span v-html="item.productsInfo"></span></detail-list-item>
+            <detail-list-item term=""><span v-html="item.productsInfo"></span><a v-show="item.showPL" @click="handleShowPL(item.t8Id)">明细</a></detail-list-item>
           </detail-list>
+          <a-modal
+            v-model="visibleShowPLDialog"
+            title="PL"
+            :ok-button-props="{ props: { disabled: false } }"
+            :cancel-button-props="{ props: { disabled: false } }"
+            @ok="handleOkShowPLDialog"
+            @cancel="handleOkShowPLDialog"
+            :width="1024"
+          >
+            <show-pl :t8Id="t8Id2" :biId="this.approvalBasicInfo.bI_ID" ref="showplchild2"></show-pl>
+          </a-modal>
         </a-card>
       </a-tab-pane>
       <a-tab-pane key="2" tab="基本信息">
@@ -369,9 +380,6 @@
                 </a-modal>
               </a-col>
             </a-row>
-            <a-form-item v-if="showSubmit">
-              <a-button htmlType="submit" >Submit</a-button>
-            </a-form-item>
           </a-form>
         </a-card>
         <a-tabs type="card" @change="callbackBase">
@@ -917,6 +925,7 @@ export default {
                 t21Id: 0
             },
             t8Id: 0,
+            t8Id2: 0,
             t11Info: {
             },
             ta1Info: {
@@ -1321,43 +1330,6 @@ export default {
             }
         }
     },
-    watch: {
-      vendorInfo: function (val) {
-        debugger
-        /*
-        var re = /<a[^>]*href=['"]([^"]*)['"][^>]*>(.*?)<\/a>/g
-
-        var arrText = []
-        while (re.exec(val[0].productsInfo) != null) {
-          arrText.push(RegExp.$2 + '\n')
-        }
-        var Text = arrText[0]
-
-        var arrHtml = []
-        while (re.exec(val[0].productsInfo) != null) {
-          arrHtml.push(RegExp.$1 + '\n')
-        }
-        var textHtml = arrHtml[0]
-
-        // /TradeNew/ShowPL?t8Id=77629&t11Id=25900' data-toggle='modal'  data-target='#myPLDialog↵
-        var t8IdTmp = ((((textHtml.split(' '))[0].split('?'))[1].split('&'))[0].split('='))[1]
-
-        var contentHtml = ''
-
-        contentHtml = contentHtml + ' <a-modal '
-        contentHtml = contentHtml + ' v-model="visibleShowPLDialog" '
-        contentHtml = contentHtml + ' title="PL" '
-        contentHtml = contentHtml + ' :ok-button-props="{ props: { disabled: false } }" '
-        contentHtml = contentHtml + ' :cancel-button-props="{ props: { disabled: false } }" '
-        contentHtml = contentHtml + '  @ok="handleOkShowPLDialog" '
-        contentHtml = contentHtml + ' @cancel="handleOkShowPLDialog" '
-        contentHtml = contentHtml + ' :width="1024"> '
-        contentHtml = contentHtml + ' <show-pl :t8Id="' + t8IdTmp + '" :biId="this.$route.params.biId" ref="showplchild"></show-pl> '
-        contentHtml = contentHtml + ' </a-modal> <a href="javascript:void(0)"click="handleShowPLDialog">明细</a> '
-        val[0].productsInfo = val[0].productsInfo.replace(/(<\/?a.*?>)|(<\/?span.*?>)/g, '').replace(Text.replace('\n', ''), contentHtml)
-        */
-      }
-    },
     methods: {
         queryFlowApproveOpinions () {
             var _parentThis = this
@@ -1392,6 +1364,39 @@ export default {
             var _parentThis = this
             GetFormViewCRPT(this.queryParamByOne1).then(res => {
                 _parentThis.vendorInfo = res.reponse
+                debugger
+                for (var i = 0; i < _parentThis.vendorInfo.length; i++) {
+                  _parentThis.vendorInfo[i].showPL = false
+                  _parentThis.vendorInfo[i].t8Id = 0
+                  var item = _parentThis.vendorInfo[i]
+                  var re = /<a[^>]*href=['"]([^"]*)['"][^>]*>(.*?)<\/a>/g
+
+                  var arrText = []
+                  while (re.exec(item.productsInfo) != null) {
+                    arrText.push(RegExp.$2 + '\n')
+                  }
+                  if (arrText.length >= 1) {
+                    var Text = arrText[0]
+                    Text = Text.replace('\n', '')
+
+                    var arrHtml = []
+                    while (re.exec(item.productsInfo) != null) {
+                      arrHtml.push(RegExp.$1 + '\n')
+                    }
+
+                    if (arrHtml.length >= 1) {
+                      var textHtml = arrHtml[0]
+                      var t8IdTmp = ((((textHtml.split(' '))[0].split('?'))[1].split('&'))[0].split('='))[1]
+                      _parentThis.vendorInfo[i].showPL = true
+                      if (this.t113Info && this.t113Info.length && this.t113Info.length > 0 && this.t113Info[0] && this.t113Info[0].t113_ID && this.t113Info[0].t113_ID > 0) {
+                        _parentThis.vendorInfo[i].t8Id = 0
+                      } else {
+                        _parentThis.vendorInfo[i].t8Id = t8IdTmp
+                      }
+                      _parentThis.vendorInfo[i].productsInfo = _parentThis.vendorInfo[i].productsInfo.replace(/(<\/?a.*?>)|(<\/?span.*?>)/g, '').replace(Text.replace('\n', ''), '')
+                    }
+                  }
+                }
             })
         },
         queryPublicTA1ForTA1 () {
@@ -1542,12 +1547,14 @@ export default {
           this.queryPublicT112GetT112()
           this.visibleSQDialog = true
         },
-        handleShowPLDialog () {
-          debugger
-          this.visibleShowPLDialog = true
-        },
         handleOkShowPLDialog () {
           this.visibleShowPLDialog = false
+        },
+        handleShowPL (t8IdTmp) {
+          debugger
+          this.t8Id2 = t8IdTmp
+          this.visibleShowPLDialog = true
+          this.$refs.showplchild2.queryBAppT81()
         },
         handleOkSQDialog () {
           this.visibleSQDialog = false
@@ -1670,8 +1677,8 @@ export default {
         biId: this.$route.params.biId
       }
       this.queryBApp_T11()
-      this.queryApprovalBasicInfo()
       this.queryBAppT113()
+      this.queryApprovalBasicInfo()
     }
 }
 </script>

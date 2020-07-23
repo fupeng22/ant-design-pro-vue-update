@@ -139,6 +139,14 @@ export default {
         }
         this.queryBAppT811()
       }
+    },
+    activated () {
+      debugger
+      this.queryBAppT81()
+    },
+    mounted () {
+      debugger
+      this.queryBAppT81()
     }
 }
 </script>
