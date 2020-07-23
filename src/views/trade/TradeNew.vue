@@ -346,7 +346,7 @@
                     v-model="t11Info.t0_BUSINESS_RT_TYPE_NM"/>
                 </a-form-item>
               </a-col>
-              <a-col :lg="16" :md="12" :sm="24">
+              <a-col :lg="16" :md="12" :sm="24" v-show="this.t113Info && this.t113Info.length && this.t113Info.length > 0 && this.t113Info[0] && this.t113Info[0].t113_ID && this.t113Info[0].t113_ID > 0">
                 <a-form-item>
                   <a @click="handleShowSQDialog">销售报价</a>
                 </a-form-item>
@@ -620,7 +620,7 @@
           </a-tab-pane>
         </a-tabs>
       </a-tab-pane>
-      <a-tab-pane key="3" tab="销售报价明细">
+      <a-tab-pane key="3" tab="销售报价明细" v-if="this.t113Info && this.t113Info.length && this.t113Info.length > 0 && this.t113Info[0] && this.t113Info[0].t113_ID && this.t113Info[0].t113_ID > 0">
         <a-card type="inner" title="销售报价信息" hoverable="true">
           <a-form @submit="handleSubmit" :form="form" class="form">
             <a-row class="form-row" :gutter="16">
@@ -1324,6 +1324,7 @@ export default {
     watch: {
       vendorInfo: function (val) {
         debugger
+        /*
         var re = /<a[^>]*href=['"]([^"]*)['"][^>]*>(.*?)<\/a>/g
 
         var arrText = []
@@ -1352,9 +1353,9 @@ export default {
         contentHtml = contentHtml + ' @cancel="handleOkShowPLDialog" '
         contentHtml = contentHtml + ' :width="1024"> '
         contentHtml = contentHtml + ' <show-pl :t8Id="' + t8IdTmp + '" :biId="this.$route.params.biId" ref="showplchild"></show-pl> '
-        contentHtml = contentHtml + ' </a-modal> <a @click="handleShowPLDialog">明细</a> '
-
+        contentHtml = contentHtml + ' </a-modal> <a href="javascript:void(0)"click="handleShowPLDialog">明细</a> '
         val[0].productsInfo = val[0].productsInfo.replace(/(<\/?a.*?>)|(<\/?span.*?>)/g, '').replace(Text.replace('\n', ''), contentHtml)
+        */
       }
     },
     methods: {
@@ -1542,6 +1543,7 @@ export default {
           this.visibleSQDialog = true
         },
         handleShowPLDialog () {
+          debugger
           this.visibleShowPLDialog = true
         },
         handleOkShowPLDialog () {
