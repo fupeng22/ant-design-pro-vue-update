@@ -875,6 +875,7 @@ export default {
     data () {
         return {
             visibleSQDialog: false,
+            visibleShowPLDialog: false,
             queryParamByOne: {
                 biId: this.$route.params.biId
             },
@@ -1323,38 +1324,37 @@ export default {
     watch: {
       vendorInfo: function (val) {
         debugger
-        var re=/<a[^>]*href=['"]([^"]*)['"][^>]*>(.*?)<\/a>/g
+        var re = /<a[^>]*href=['"]([^"]*)['"][^>]*>(.*?)<\/a>/g
 
-        var arrText=[];
-        while(re.exec(val[0].productsInfo)!=null){ 
-          arrText.push(RegExp.$2+'\n')
+        var arrText = []
+        while (re.exec(val[0].productsInfo) != null) {
+          arrText.push(RegExp.$2 + '\n')
         }
-        var Text=arrText[0]
+        var Text = arrText[0]
 
-        var arrHtml=[];
-        while(re.exec(val[0].productsInfo)!=null){ 
-          arrHtml.push(RegExp.$1+'\n')
+        var arrHtml = []
+        while (re.exec(val[0].productsInfo) != null) {
+          arrHtml.push(RegExp.$1 + '\n')
         }
-        var textHtml=arrHtml[0]
+        var textHtml = arrHtml[0]
 
         // /TradeNew/ShowPL?t8Id=77629&t11Id=25900' data-toggle='modal'  data-target='#myPLDialog↵
-        var t8IdTmp=((((textHtml.split(' '))[0].split('?'))[1].split('&'))[0].split('='))[1]
+        var t8IdTmp = ((((textHtml.split(' '))[0].split('?'))[1].split('&'))[0].split('='))[1]
 
         var contentHtml = ''
 
         contentHtml = contentHtml + ' <a-modal '
-        contentHtml = contentHtml + ' v-model="visibleSQDialog" '
-        contentHtml = contentHtml + ' title="相关销售报价" '
+        contentHtml = contentHtml + ' v-model="visibleShowPLDialog" '
+        contentHtml = contentHtml + ' title="PL" '
         contentHtml = contentHtml + ' :ok-button-props="{ props: { disabled: false } }" '
         contentHtml = contentHtml + ' :cancel-button-props="{ props: { disabled: false } }" '
-        contentHtml = contentHtml + '  @ok="handleOkSQDialog" '
-        contentHtml = contentHtml + ' @cancel="handleOkSQDialog" '
+        contentHtml = contentHtml + '  @ok="handleOkShowPLDialog" '
+        contentHtml = contentHtml + ' @cancel="handleOkShowPLDialog" '
         contentHtml = contentHtml + ' :width="1024"> '
-        contentHtml = contentHtml + '  '
-        contentHtml = contentHtml + ' </a-modal> '
+        contentHtml = contentHtml + ' <show-pl :t8Id="' + t8IdTmp + '" :biId="this.$route.params.biId" ref="showplchild"></show-pl> '
+        contentHtml = contentHtml + ' </a-modal> <a @click="handleShowPLDialog">明细</a> '
 
-        val[0].productsInfo.replace(/(<\/?a.*?>)|(<\/?span.*?>)/g, '').replace(Text,'fff')
-
+        val[0].productsInfo = val[0].productsInfo.replace(/(<\/?a.*?>)|(<\/?span.*?>)/g, '').replace(Text.replace('\n', ''), contentHtml)
       }
     },
     methods: {
@@ -1540,6 +1540,12 @@ export default {
           }
           this.queryPublicT112GetT112()
           this.visibleSQDialog = true
+        },
+        handleShowPLDialog () {
+          this.visibleShowPLDialog = true
+        },
+        handleOkShowPLDialog () {
+          this.visibleShowPLDialog = false
         },
         handleOkSQDialog () {
           this.visibleSQDialog = false
