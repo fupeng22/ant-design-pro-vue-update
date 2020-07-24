@@ -1553,10 +1553,9 @@ export default {
         },
         handleShowPL (t8IdTmp) {
           debugger
+          this.visibleShowPLDialog = true
           this.t8Id2 = parseInt(t8IdTmp)
           this.biId2 = parseInt(this.$route.params.biId)
-          this.$refs.showplchild2.queryBAppT81()
-          this.visibleShowPLDialog = true
         },
         handleOkSQDialog () {
           this.visibleSQDialog = false

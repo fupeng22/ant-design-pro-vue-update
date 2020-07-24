@@ -41,6 +41,14 @@ export default {
         default: 0
       }
     },
+    watch: {
+      biId (val) {
+        this.queryBAppT81()
+      },
+      t8Id (val) {
+        this.queryBAppT81()
+      }
+    },
     data () {
         return {
           queryParamByOne: {
