@@ -116,19 +116,26 @@ export default {
     methods: {
       queryBAppT81 () {
           var _parentThis = this
-          if (this.t8Id === 0) {
-            LoadBAppT81LCR(this.queryParamByOne).then(res => {
+          if (_parentThis.t8Id === 0) {
+            _parentThis.queryParamByOne = {
+              biId: _parentThis.biId
+            }
+            LoadBAppT81LCR(_parentThis.queryParamByOne).then(res => {
               _parentThis.t81List = res.reponse
             })
           } else {
-            LoadBAppT81(this.queryParamByOne1).then(res => {
+            _parentThis.queryParamByOne1 = {
+              biId: _parentThis.biId,
+              t8Id: _parentThis.t8Id
+            }
+            LoadBAppT81(_parentThis.queryParamByOne1).then(res => {
               _parentThis.t81List = res.reponse
             })
           }
       },
       queryBAppT811 () {
           var _parentThis = this
-          LoadBAppT811(this.queryParamByOne2).then(res => {
+          LoadBAppT811(_parentThis.queryParamByOne2).then(res => {
             _parentThis.t811List = res.reponse
           })
       },

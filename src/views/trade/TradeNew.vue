@@ -75,7 +75,7 @@
             @cancel="handleOkShowPLDialog"
             :width="1024"
           >
-            <show-pl :t8Id="t8Id2" :biId="this.approvalBasicInfo.bI_ID" ref="showplchild2"></show-pl>
+            <show-pl :t8Id="t8Id2" :biId="biId2" ref="showplchild2"></show-pl>
           </a-modal>
         </a-card>
       </a-tab-pane>
@@ -926,6 +926,7 @@ export default {
             },
             t8Id: 0,
             t8Id2: 0,
+            biId2: 0,
             t11Info: {
             },
             ta1Info: {
@@ -1552,9 +1553,10 @@ export default {
         },
         handleShowPL (t8IdTmp) {
           debugger
-          this.t8Id2 = t8IdTmp
-          this.visibleShowPLDialog = true
+          this.t8Id2 = parseInt(t8IdTmp)
+          this.biId2 = parseInt(this.$route.params.biId)
           this.$refs.showplchild2.queryBAppT81()
+          this.visibleShowPLDialog = true
         },
         handleOkSQDialog () {
           this.visibleSQDialog = false
